@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>莎莉鸡 - 视觉设计版简历</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --page: #f2f2f2;
+            --hero: #d9d9d9;
+            --ink: #050505;
+            --body: #777;
+            --soft: #b9b9b9;
+            --line: #e4e4e4;
+            --track: #dedede;
+        }
+
+        body {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 38px 24px;
+            color: var(--ink);
+            background: #e7e7e7;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        .resume {
+            width: min(210mm, calc(100vw - 48px));
+            min-height: 297mm;
+            overflow: hidden;
+            background: var(--page);
+            box-shadow: 0 4px 22px rgba(0, 0, 0, .16);
+        }
+
+        .hero {
+            min-height: 330px;
+            display: grid;
+            grid-template-columns: 55% 45%;
+            background: var(--hero);
+        }
+
+        .portrait {
+            position: relative;
+            display: grid;
+            align-items: end;
+            justify-items: center;
+            overflow: hidden;
+            padding: 34px 32px 0;
+        }
+
+        .portrait::before {
+            content: "";
+            position: absolute;
+            width: 270px;
+            height: 270px;
+            bottom: -68px;
+            border-radius: 50%;
+            background: #c9c9c9;
+        }
+
+        .portrait-box {
+            position: relative;
+            z-index: 1;
+            width: min(82%, 310px);
+            height: 286px;
+            display: grid;
+            place-items: center;
+            color: #5f5f5f;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,.36), rgba(255,255,255,0) 42%),
+                #cfcfcf;
+            border: 1px dashed rgba(0,0,0,.24);
+            border-bottom: 0;
+            font-size: 15px;
+            letter-spacing: 2px;
+        }
+
+        .portrait-box::after {
+            content: "PHOTO";
+            position: absolute;
+            bottom: 18px;
+            font-size: 58px;
+            line-height: 1;
+            font-weight: 900;
+            color: rgba(255,255,255,.34);
+            letter-spacing: 6px;
+        }
+
+        .intro {
+            display: grid;
+            align-content: center;
+            justify-items: end;
+            padding: 42px 70px 36px 28px;
+            text-align: right;
+        }
+
+        .role {
+            margin-bottom: 22px;
+            font-size: 46px;
+            line-height: 1.28;
+            font-weight: 900;
+            letter-spacing: 5px;
+        }
+
+        .name {
+            margin-bottom: 42px;
+            font-size: 21px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .contact {
+            display: grid;
+            gap: 11px;
+            color: #222;
+            font-size: 15px;
+            line-height: 1.45;
+            font-weight: 700;
+            justify-items: end;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: minmax(0, 1.42fr) minmax(0, .9fr);
+            gap: 54px;
+            padding: 52px 54px 56px;
+        }
+
+        .main,
+        .side {
+            display: grid;
+            align-content: start;
+            gap: 38px;
+        }
+
+        h2 {
+            margin-bottom: 18px;
+            font-size: 22px;
+            line-height: 1.2;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        p,
+        li {
+            color: var(--body);
+            font-size: 15px;
+            line-height: 2;
+            text-align: justify;
+        }
+
+        .experience {
+            display: grid;
+            gap: 30px;
+        }
+
+        .experience-item {
+            display: grid;
+            gap: 13px;
+        }
+
+        .item-head {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 18px;
+            align-items: baseline;
+        }
+
+        .item-title {
+            font-size: 16px;
+            line-height: 1.55;
+            font-weight: 900;
+        }
+
+        .time {
+            color: #9b9b9b;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        ul {
+            list-style: none;
+            display: grid;
+            gap: 2px;
+        }
+
+        li {
+            position: relative;
+            padding-left: 16px;
+        }
+
+        li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 4px;
+            height: 4px;
+            background: #111;
+        }
+
+        .logos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border-radius: 7px;
+            color: #fff;
+            background: #030303;
+            font-size: 15px;
+            font-weight: 900;
+            font-family: Georgia, serif;
+        }
+
+        .award-list {
+            display: grid;
+            gap: 13px;
+            color: var(--body);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .education {
+            color: var(--body);
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        .education strong {
+            color: #222;
+            font-weight: 900;
+        }
+
+        .skills {
+            display: grid;
+            gap: 20px;
+        }
+
+        .skill {
+            display: grid;
+            grid-template-columns: 92px 1fr;
+            gap: 18px;
+            align-items: center;
+            color: var(--body);
+            font-size: 15px;
+        }
+
+        .bar {
+            height: 5px;
+            overflow: hidden;
+            background: var(--track);
+            border-radius: 99px;
+        }
+
+        .bar i {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background: #050505;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .tags span {
+            padding: 7px 12px;
+            border: 1px solid #cfcfcf;
+            color: #555;
+            background: #fff;
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        @media (max-width: 760px) {
+            body {
+                padding: 0;
+                background: var(--page);
+            }
+
+            .resume {
+                width: 100%;
+                min-height: auto;
+                box-shadow: none;
+            }
+
+            .hero,
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: 0;
+            }
+
+            .portrait {
+                min-height: 280px;
+            }
+
+            .intro,
+            .content {
+                padding: 34px 26px;
+            }
+
+            .content {
+                gap: 38px;
+            }
+
+            .role {
+                font-size: 38px;
+            }
+
+            .item-head {
+                grid-template-columns: 1fr;
+                gap: 3px;
+            }
+
+            .time {
+                white-space: normal;
+            }
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: #fff;
+            }
+
+            .resume {
+                width: 210mm;
+                min-height: 297mm;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article class="resume">
+        <header class="hero">
+            <div class="portrait" aria-label="照片占位区">
+                <div class="portrait-box">图片占位符</div>
+            </div>
+
+            <div class="intro">
+                <div class="role">AI研究<br>算法工程师</div>
+                <div class="name">莎莉鸡</div>
+                <div class="contact">
+                    <span>135-6666-1526</span>
+                    <span>shaliji@email.com</span>
+                    <span>杭州市</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="content">
+            <div class="main">
+                <section>
+                    <h2>自我介绍</h2>
+                    <p>一名对人工智能充满热情的初中生，数学成绩优异，具备扎实的逻辑思维能力。学习能力强，对新技术充满好奇心。希望通过科大讯飞研学夏令营，深入了解推荐算法方向的技术应用，为未来职业规划积累经验。</p>
+                </section>
+
+                <section>
+                    <h2>学习经历</h2>
+                    <div class="experience">
+                        <div class="experience-item">
+                            <div class="item-head">
+                                <div class="item-title">杭州第二初中 | 信息技术课程</div>
+                                <div class="time">学校课程</div>
+                            </div>
+                            <ul>
+                                <li>系统学习信息技术课程，初步接触编程概念和计算思维</li>
+                                <li>培养了逻辑分析能力和问题解决能力</li>
+                                <li>为后续深入学习 AI 算法打下基础</li>
+                            </ul>
+                        </div>
+
+                        <div class="experience-item">
+                            <div class="item-head">
+                                <div class="item-title">数学学科深耕 | 自主探索</div>
+                                <div class="time">持续学习中</div>
+                            </div>
+                            <ul>
+                                <li>数学成绩优异，对算法背后的数学原理有浓厚兴趣</li>
+                                <li>了解线性代数、概率统计等机器学习基础</li>
+                                <li>为未来学习推荐算法提供坚实的理论支撑</li>
+                            </ul>
+                        </div>
+
+                        <div class="experience-item">
+                            <div class="item-head">
+                                <div class="item-title">AI前沿技术 | 课外探索</div>
+                                <div class="time">课外自学</div>
+                            </div>
+                            <ul>
+                                <li>主动关注 AI 行业动态，了解推荐算法应用场景</li>
+                                <li>研究短视频推荐、购物推荐等实际案例</li>
+                                <li>对“如何让机器理解用户喜好”充满探索热情</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>未来计划</h2>
+                    <ul>
+                        <li>系统学习 Python 编程语言</li>
+                        <li>深入了解机器学习与推荐算法基础知识</li>
+                        <li>尝试完成简单的推荐系统小项目</li>
+                        <li>持续关注 AI 行业动态，保持学习热情</li>
+                    </ul>
+                </section>
+            </div>
+
+            <aside class="side">
+                <section>
+                    <h2>兴趣爱好</h2>
+                    <div class="logos" aria-label="兴趣图标">
+                        <span class="logo">AI</span>
+                        <span class="logo">M</span>
+                        <span class="logo">C</span>
+                        <span class="logo">R</span>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>获奖经历</h2>
+                    <div class="award-list">
+                        <div>数学成绩优异 · 校级数学学科突出表现</div>
+                        <div>AI研学夏令营 · 入选参加科大讯飞研学活动</div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>教育背景</h2>
+                    <div class="education">
+                        <strong>杭州第二初中</strong><br>
+                        初中在读 · 初二年级<br>
+                        在读 · 数学成绩优异 · 逻辑思维突出
+                    </div>
+                </section>
+
+                <section>
+                    <h2>职业技能</h2>
+                    <div class="skills">
+                        <div class="skill">
+                            <span>数学能力</span>
+                            <div class="bar"><i style="width: 90%"></i></div>
+                        </div>
+                        <div class="skill">
+                            <span>逻辑思维</span>
+                            <div class="bar"><i style="width: 85%"></i></div>
+                        </div>
+                        <div class="skill">
+                            <span>学习能力</span>
+                            <div class="bar"><i style="width: 95%"></i></div>
+                        </div>
+                        <div class="skill">
+                            <span>信息技术</span>
+                            <div class="bar"><i style="width: 60%"></i></div>
+                        </div>
+                        <div class="skill">
+                            <span>AI/算法兴趣</span>
+                            <div class="bar"><i style="width: 80%"></i></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>关键词</h2>
+                    <div class="tags">
+                        <span>人工智能</span>
+                        <span>数学</span>
+                        <span>编程</span>
+                        <span>阅读</span>
+                    </div>
+                </section>
+            </aside>
+        </main>
+    </article>
+</body>
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>科大讯飞岗位选择卡</title>
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --panel: #fffaf0;
+    --card: #fffdf8;
+    --ink: #1f2933;
+    --muted: #687076;
+    --line: #ded6c6;
+    --accent: #0f766e;
+    --accent-soft: #d6f3ef;
+    --salary: #d6452f;
+    --dark: #17201d;
+    --shadow: 0 18px 42px rgba(59, 48, 34, .12);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    font-family: "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background:
+      linear-gradient(90deg, rgba(15,118,110,.07) 1px, transparent 1px),
+      linear-gradient(180deg, #faf7ef 0%, var(--bg) 100%);
+    background-size: 28px 28px, auto;
+  }
+  .page {
+    width: min(1480px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 30px 0 64px;
+  }
+  header {
+    padding: 34px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel);
+    box-shadow: var(--shadow);
+  }
+  .eyebrow {
+    margin: 0 0 12px;
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: .12em;
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(34px, 5vw, 62px);
+    line-height: 1.05;
+    letter-spacing: 0;
+  }
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 18px 0 22px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(255,250,240,.94);
+    backdrop-filter: blur(12px);
+  }
+  .search {
+    flex: 1 1 260px;
+    min-width: 0;
+    height: 42px;
+    padding: 0 14px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-weight: 700;
+  }
+  .filter {
+    min-width: 128px;
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-weight: 800;
+  }
+  .jobs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 18px;
+  }
+  .job-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 520px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--card);
+    box-shadow: 0 12px 28px rgba(59, 48, 34, .08);
+  }
+  .card-top {
+    padding: 20px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #fff 0%, #fff7e8 100%);
+  }
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .index {
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: var(--dark);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 900;
+  }
+  .salary {
+    color: var(--salary);
+    font-size: 24px;
+    font-weight: 1000;
+    white-space: nowrap;
+  }
+  h2 {
+    margin: 14px 0 12px;
+    font-size: 23px;
+    line-height: 1.25;
+    letter-spacing: 0;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .meta span {
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: #105a54;
+    font-size: 12px;
+    font-weight: 900;
+  }
+  .summary {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.7;
+    font-weight: 650;
+  }
+  .content {
+    display: grid;
+    gap: 14px;
+    padding: 16px;
+  }
+  .block {
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #fff;
+  }
+  h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+  }
+  ul {
+    margin: 0;
+    padding-left: 18px;
+    color: #424b54;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+  li { margin: 5px 0; }
+  .copy-btn {
+    margin-top: auto;
+    border: 0;
+    border-top: 1px solid var(--line);
+    padding: 14px 16px;
+    cursor: pointer;
+    background: var(--dark);
+    color: #fff;
+    font-weight: 900;
+    font-size: 14px;
+  }
+  .copy-btn:hover { background: #0f766e; }
+  .empty {
+    display: none;
+    padding: 28px;
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--muted);
+    font-weight: 800;
+  }
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: var(--dark);
+    color: white;
+    font-weight: 900;
+    box-shadow: 0 12px 30px rgba(0,0,0,.2);
+    transition: all .22s ease;
+    z-index: 20;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  @media (max-width: 900px) {
+    .page { width: min(100% - 24px, 1480px); padding-top: 16px; }
+    header { padding: 24px; }
+    .jobs { grid-template-columns: 1fr; }
+    .toolbar { position: static; }
+    .salary { font-size: 21px; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div>
+        <p class="eyebrow">IFLYTEK ROLE EXPLORER</p>
+        <h1>科大讯飞岗位选择卡</h1>
+      </div>
+    </header>
+
+    <section class="toolbar">
+      <input id="search" class="search" type="search" placeholder="搜索岗位、城市、职责关键词" />
+      <select id="categoryFilter" class="filter" aria-label="岗位方向"></select>
+      <select id="salaryFilter" class="filter" aria-label="薪资区间">
+        <option value="">全部薪资</option>
+        <option value="lt20">20K 以下</option>
+        <option value="20to35">20-35K</option>
+        <option value="35plus">35K 以上</option>
+      </select>
+    </section>
+
+    <section id="jobs" class="jobs"></section>
+    <div id="empty" class="empty">没有匹配的岗位，换个关键词或筛选条件。</div>
+  </main>
+
+  <div class="toast" id="toast">已复制到剪贴板</div>
+
+<script>
+  const jobs = [
+    {
+      category: '售前咨询 / 解决方案',
+      title: '售前咨询经理',
+      salary: '20-40K',
+      city: '北京',
+      experience: '3-5年',
+      education: '本科',
+      summary: '面向高教与职教客户，完成需求沟通、方案设计、宣讲演示与商务推进。',
+      duties: ['与高教、职教领域中高层客户深度沟通，准确把握诉求与业务需求。', '基于产品体系规划综合解决方案、汇报材料，引导客户认可并促进合作。', '参与技术交流、方案宣讲、系统演示、商务谈判和投招标活动。', '协同营销、市场、项目和产品团队制定咨询计划并推进实施。'],
+      requirements: ['本科及以上，泛 IT 或师范教育类相关专业。', '3 年以上行业信息化方案咨询经验，熟悉教育行业优先。', '具备方案写作、客户报告、商务分析、结构化表达和演讲能力。']
+    },
+    {
+      category: '项目交付 / 项目管理',
+      title: '科大讯飞-项目经理/主管-北京',
+      salary: '25-35K',
+      city: '北京',
+      experience: '5-10年',
+      education: '本科',
+      summary: '负责重大项目交付与政府客户 AI 赋能方案孵化，保障项目目标和客户满意度。',
+      duties: ['负责重大项目交付，协调资源按时保质达成项目目标。', '组织央地两级资源，推动政府客户 AI 赋能方案产品化。', '协助市场团队完成投标、合同拟定、风险评估和规避方案。'],
+      requirements: ['5 年以上政府或事业单位软件交付项目管理经验。', '目标驱动、抗压强，能把控现场工作和关键干系人诉求。', '具备阶段汇报、文档编写、政法类交付或 AI 行业应用经验优先。']
+    },
+    {
+      category: '运维 / IT 技术支持',
+      title: '中高级运维工程师',
+      salary: '15-25K·14薪',
+      city: '北京',
+      experience: '3-5年',
+      education: '本科',
+      summary: '负责应用系统、AI 引擎、Docker/K8s、数据库和国产化环境的稳定运维。',
+      duties: ['负责应用系统安装、部署、调试、运行监控、故障定位和处理。', '承担 AI 引擎依赖包部署、环境配置、运行监控和问题处理。', '负责 Docker、K8s 集群设计、部署、发布、扩缩容及日常运维。'],
+      requirements: ['本科及以上计算机相关专业，3 年以上运维经验。', '熟悉 Tomcat、Nginx、Kafka、MySQL、Oracle 等中间件和数据库。', '掌握容器、K8s、系统变更管理、国产化环境或网络基础配置优先。']
+    },
+    {
+      category: '研发 / 算法',
+      title: '核心研发平台-基模算法工程师-合肥',
+      salary: '20-40K·14薪',
+      city: '北京',
+      experience: '1-3年',
+      education: '硕士',
+      summary: '参与星火大模型底座在理解、推理、答题、代码、Agent 等领域的算法研发。',
+      duties: ['参与大模型底座在特定领域的研究，推动预训练和后训练算法优化。', '参与业务场景的问题定义、数据构建、模型实验、评估验证和部署上线。', '独立设计和执行实验，分析结果并迭代优化方案。'],
+      requirements: ['计算机、通信、自动化、EE、软件工程、应用数学等硕士及以上。', '熟悉 NLP、深度学习、大模型原理和常见算法。', '熟悉 Python、数据结构、算法实现和 Linux 开发环境。']
+    },
+    {
+      category: '销售 / 市场',
+      title: '软件客户经理',
+      salary: '15-30K·14薪',
+      city: '北京',
+      experience: '经验不限',
+      education: '本科',
+      summary: '负责通用人工智能方向客户开拓、解决方案牵引、销售签约与回款。',
+      duties: ['洞察科技产业客户需求，开拓维护关键客户和合作伙伴。', '制定关键行业基线解决方案，牵引行业解决方案内容开发。', '打造并复制标杆项目，指导区域销售拓展和规模复制。'],
+      requirements: ['本科及以上，3 年以上行业工作经验，央国企经验优先。', '理解通用人工智能行业 1-2 个方向关键技术。', '具备高层客户对话、招投标、标书制作和项目运作能力。']
+    },
+    {
+      category: '销售 / 市场',
+      title: '教育BG-商业分析师-北京',
+      salary: '25-45K·14薪',
+      city: '北京',
+      experience: '5-10年',
+      education: '本科',
+      summary: '围绕全球教育市场洞察、商业分析和战略课题，为教育业务增长提供决策支持。',
+      duties: ['建立全球重点区域教育动向监测机制，识别新兴市场机会。', '围绕业务增长、产品本地化和资源投入开展专项商业分析。', '独立承担或主导战略课题研究，完成从问题构建到报告呈现全流程。'],
+      requirements: ['8 年以上工作经验，至少 5 年教育科技、互联网教育或相关战略经验。', '具备结构化思维、数据处理、报告输出和 AI 工具辅助分析能力。', '英语可作为工作语言，海外教育市场从 0 到 1 经验优先。']
+    },
+    {
+      category: '销售 / 市场',
+      title: '市场经理',
+      salary: '30-60K·14薪',
+      city: '北京',
+      experience: '经验不限',
+      education: '本科',
+      summary: '统筹文旅市场战略、行业资源整合、品牌发声和市场份额提升。',
+      duties: ['制定文旅市场中长期策略并落地执行，对市场业绩负责。', '参与峰会、推介会等活动，传递产品价值并塑造行业影响力。', '整合政府文旅部门、景区、OTA 平台等资源并推动合作。'],
+      requirements: ['本科及以上，市场营销、文旅管理等相关专业。', '5 年以上文旅行业市场相关经验，有公开站台和行业发言经历。', '具备市场洞察、渠道资源、团队管理和高频出差适应能力。']
+    },
+    {
+      category: '运营 / 增长',
+      title: '用户增长专家',
+      salary: '25-35K',
+      city: '杭州',
+      experience: '5-10年',
+      education: '本科',
+      summary: '负责社交或虚拟伴侣类产品增长策略，从渠道开拓到投放复盘全链路推进。',
+      duties: ['制定并执行线上线下整合增长策略，负责渠道从 0 到 1 开拓。', '管理渠道挖掘、商务谈判、方案策划、内容监收到投放复盘。', '监控渠道投入产出数据，迭代策略并提升拉新、转化和 ROI。'],
+      requirements: ['3 年以上互联网社交类产品成功用户增长经验。', '熟悉微信生态、小红书、抖音等内容平台流量逻辑。', '具备商务拓展、资源整合、项目管理和数据分析能力。']
+    },
+    {
+      category: '运营 / 增长',
+      title: '大模型内容安全-机审策略运营组长',
+      salary: '20-35K·14薪',
+      city: '杭州',
+      experience: '3-5年',
+      education: '本科',
+      summary: '管理机器审核策略运营团队，制定审核策略并持续优化安全与体验。',
+      duties: ['负责机器审核策略运营团队管理，确保团队目标达成。', '深入业务场景制定机器审核策略，推进落地并兼顾体验。', '分析漏杀、误杀和数据特征，提出策略优化需求。'],
+      requirements: ['本科及以上，3 年以上机器审核或风险管理经验。', '有团队管理经验、洞察能力和跨部门推动能力优先。', '理解机器学习、自然语言处理等技术并有实际项目经验优先。']
+    },
+    {
+      category: '运营 / 增长',
+      title: '研究院大模型 AIGC 内容安全运营',
+      salary: '13-25K·14薪',
+      city: '北京',
+      experience: '经验不限',
+      education: '本科',
+      summary: '构建 AIGC 内容安全策略体系，面向文本、图像等多模态场景做风险治理。',
+      duties: ['依据法规和产品属性搭建内容安全审核规则与制度框架。', '通过数据分析优化内容安全策略，提升风险识别和召回效能。', '整合内外部反馈，评估策略有效性并推动安全产品团队落地优化。'],
+      requirements: ['本科以上，人机交互、心理学、统计学、语言学等相关专业。', '具备内容安全实战经验，理解审核逻辑和风险防控体系。', '熟悉 AIGC 内容生产流程、多模态风险、数据分析和跨部门协作。']
+    },
+    {
+      category: '运营 / 增长',
+      title: '讯飞绘文-产品负责人（新媒体方向）',
+      salary: '35-65K·14薪',
+      city: '北京',
+      experience: '经验不限',
+      education: '本科',
+      summary: '负责公众号、小红书等新媒体矩阵从 0 到 1 搭建与 AI 内容赛道增长。',
+      duties: ['全权负责新媒体矩阵搭建、日常内容运营及规模化增长。', '结合讯飞绘文 AI 产品特性，策划适配平台流量逻辑的内容体系。', '监测账号数据、复盘爆款逻辑，优化内容策略与运营打法。'],
+      requirements: ['全日制统招本科及以上。', '具备新媒体运营方向管理经验或完整成功创业经历。', '精通公众号、小红书平台规则、爆款逻辑和内容策划。']
+    },
+    {
+      category: '教育培训 / 教研',
+      title: '科学教育课程产品经理-北京/合肥',
+      salary: '15-30K·14薪',
+      city: '北京',
+      experience: '3-5年',
+      education: '本科',
+      summary: '统筹小学科学课程选题、课程体系、内容开发、教具和产品包装。',
+      duties: ['策划小学科学课程选题、体系设计、课程开发、盒子和包装设计。', '负责科学类课程设计开发，产出教学内容和教师/学生手册。', '提炼产品卖点，配合市场侧完成产品售卖。'],
+      requirements: ['本科及以上，理工科背景，物理及科学学科教育相关专业优先。', '3 年以上课程内容开发或教学经验，2 年以上学科产品经验。', '熟悉科学课程标准，PBL/STEM/STEAM 课程设计和 AI 工具优先。']
+    },
+    {
+      category: '教育培训 / 教研',
+      title: '教育BG-小学语文教研员-北京',
+      salary: '18-25K·14薪',
+      city: '北京',
+      experience: '3-5年',
+      education: '本科',
+      summary: '负责学习机业务线小学语文教研和阅读思维训练产品研发。',
+      duties: ['制定课程体系大纲、教研方案、课程内容、脚本和资源审核。', '协作资源制作团队建设高质量视频或其他教学资源。', '协同教研、研发、产品、运营团队推动教学与技术结合。'],
+      requirements: ['汉语言文学、教育学等相关本科及以上学历。', '3 年以上头部教育机构小学语文教研经验，2 年以上一线教学经验。', '熟悉新课标、部编版教材、学情考情和小学语文知识体系。']
+    },
+    {
+      category: '教育培训 / 教研',
+      title: '科学教研员-素质教育',
+      salary: '20-30K·14薪',
+      city: '北京',
+      experience: '3-5年',
+      education: '本科',
+      summary: '面向初中理科课程体系、教学资源和产品落地反馈，提供专业教研支持。',
+      duties: ['参与制定科学课程知识体系、内容框架和评估方式。', '开发初中理科教学方案、跨学科项目及实验课例。', '对接学校与教师，推动产品在常规课、实验课、复习课中使用。'],
+      requirements: ['全日制本科及以上，物理、化学、生物、地理、科学教育等理工类专业。', '理解初中理科课标、实验教学和考试评价改革。', '能审核教学资源并组织专业学习交流。']
+    },
+    {
+      category: '产品',
+      title: 'AI 大模型内容安全方向-产品经理-合肥',
+      salary: '18-35K·14薪',
+      city: '北京',
+      experience: '3-5年',
+      education: '本科',
+      summary: '负责 AIGC 内容安全防护系统和大模型安全运营分析平台的产品规划。',
+      duties: ['规划和设计 AIGC 内容安全防护系统，定义产品核心功能。', '负责大模型安全运营分析平台的需求调研、规划、开发跟进和上线优化。', '搭建关键指标运营工具台，满足运营效果调优、实验和分析需求。'],
+      requirements: ['本科及以上，计算机、人工智能、统计学相关专业优先。', '3 年以上产品管理经验，有大模型或 AI 产品经验优先。', '理解大模型技术原理、微调机制、NLP 或 CV 应用。']
+    },
+    {
+      category: '产品',
+      title: '教育BG-用户端学科产品经理-合肥',
+      salary: '30-40K·14薪',
+      city: '北京',
+      experience: '3-5年',
+      education: '本科',
+      summary: '负责语英数物用户端产品规划，基于 AI 大模型打造智能作业和学情产品。',
+      duties: ['规划并迭代语、英、数、物用户端产品，聚焦教师和学生使用场景。', '设计智能批改、作文批改、学情诊断、个性化练习等核心功能。', '协同教研、算法、研发团队推进功能落地，并支持销售推广。'],
+      requirements: ['本科及以上，有教育产品经验优先。', '理解 AI 大模型在教育场景落地，能转化为用户可感知功能。', '熟悉校内教学、作业批改、学情分析全流程。']
+    },
+    {
+      category: '产品',
+      title: '售前产品经理（偏方案与需求管理）',
+      salary: '20-40K·14薪',
+      city: '北京',
+      experience: '3-5年',
+      education: '本科',
+      summary: '主导 AI+智慧课堂产品标准方案和定制化方案，兼顾需求判断与售前汇报。',
+      duties: ['规划并输出 AI+智慧课堂产品标准方案及定制化方案。', '判断需求可行性、商业价值和实现成本，为内部决策提供依据。', '协同产品、研发、销售团队推动需求转化、发布和客户方案汇报。'],
+      requirements: ['本科及以上，计算机、教育技术等相关专业。', '3 年以上教育行业经验，有产品经理、需求管理或售前经验。', '具备方案撰写、市场洞察、数据分析和演示汇报能力。']
+    },
+    {
+      category: '产品',
+      title: '教育-交互设计师-合肥',
+      salary: '27-45K·14薪',
+      city: '杭州',
+      experience: '5-10年',
+      education: '本科',
+      summary: '负责教育业务线 C 端 AI 产品 UX 设计，覆盖设计策略、交互定义和体验量化。',
+      duties: ['负责教育业务线 C 端 AI 产品 UX 设计，从策略到执行全流程负责。', '定义对话式交互、生成式内容呈现、Agent 任务流和多模态输入体验。', '打通教、学、练、测、评全链路体验设计，建设 AI 交互模式库。'],
+      requirements: ['6 年以上 UX 设计经验，有智能化产品和 C 端独立交付能力。', '理解 LLM 能力边界，能设计可控、可信任的交互方案。', '熟悉 Figma AI、Claude、ChatGPT 等 AI 设计与研发工具优先。']
+    },
+    {
+      category: '设计',
+      title: '教育BG-UI视觉设计师-合肥',
+      salary: '18-28K·14薪',
+      city: '合肥',
+      experience: '1-3年',
+      education: '本科',
+      summary: '负责教育类产品视觉体验，覆盖移动端、桌面端、多端规范和产品改进。',
+      duties: ['负责教育类产品体验设计，包括移动端、桌面端等视觉输出。', '站在全链路视角，制定多端设计规范并推动体验统一。', '诊断产品体验问题，提出并参与实施改进方案。'],
+      requirements: ['本科及以上，设计类或相关专业。', '3 年以上互联网或教育产品交互工作经验，熟悉 UI 设计流程。', '有 AIGC 协助设计落地案例、PC 和手机体验设计经验优先。']
+    },
+    {
+      category: '设计',
+      title: '动画设计 AI 剧抽卡师（真人&漫剧）',
+      salary: '15-20K·14薪',
+      city: '北京',
+      experience: '1-3年',
+      education: '大专',
+      summary: '全流程参与 AI 短剧、2D 动漫、3D/CG 和 AI 真人风格制作。',
+      duties: ['参与 AI 短剧制作，重点负责美术设计、人物设定、分镜绘制和动画制作。', '运用 AI 绘画、AI 动画生成工具完成高质量视觉设计和分镜优化。', '衔接后期动画与剪辑，优化动画细节和作品流畅度。'],
+      requirements: ['本科及以上，动画、美术设计、数字媒体等相关专业，具备扎实美术功底。', '1 年以上 AI 短剧或动画制作经验，熟悉多种 AI 工具。', '熟悉 AE/PR 后期合成，能独立完成美术设计和动画制作。']
+    },
+    {
+      category: '人力 / 财务 / 行政',
+      title: '高级 HRBP',
+      salary: '20-40K·14薪',
+      city: '北京',
+      experience: '5-10年',
+      education: '本科',
+      summary: '作为营销大区 HRBP，深度参与战略落地、组织设计、人才发展和文化建设。',
+      duties: ['陪伴业务战略落地，推动目标管理、绩效工具和阶段复盘。', '参与组织设计、定岗定编、人才标准和工资包/HC 规划。', '负责人才供应、人才发展、新人融入、组织文化和机制建设。'],
+      requirements: ['统招本科及以上，5 年以上人力资源管理经验。', '参与过两个功能模块以上的体系设计及操作实务。', '具备组织发展、人才管理、数据分析、客户导向和沟通推动能力。']
+    },
+    {
+      category: '人力 / 财务 / 行政',
+      title: '教育BG-业务培训经理（训战部）-合肥',
+      salary: '20-25K·14薪',
+      city: '杭州',
+      experience: '3-5年',
+      education: '本科',
+      summary: '搭建销售训战体系，萃取一线打法并推动训练效果转化为业绩结果。',
+      duties: ['搭建从新人到老兵赋能的全周期销售训战体系。', '深入销售一线萃取成功案例，形成标准化打法、话术和课程。', '组织实战演练、陪跑辅导并以业绩结果复盘训战效果。'],
+      requirements: ['本科及以上，5 年以上业务培训或 HRBP 经验。', '必须具备一线销售实战经验，理解业务销售全流程。', '精通行动学习、工作坊引导和案例教学法。']
+    },
+    {
+      category: '人力 / 财务 / 行政',
+      title: '星火军团-TD-合肥',
+      salary: '12-20K·14薪',
+      city: '合肥',
+      experience: '经验不限',
+      education: '本科',
+      summary: '面向组织诊断、人才梯队、学习项目和文化落地，推动组织发展。',
+      duties: ['通过组织诊断、访谈、行业对标识别组织架构和机制问题。', '负责关键岗位人才盘点、识别和发展体系搭建。', '设计运营高潜、飞龙、接班人等人才发展项目。'],
+      requirements: ['本科及以上，组织发展、人才发展或培训相关经验优先。', '能设计学习项目并用数据分析组织与人才问题。', '具备业务理解、项目推动和文化落地能力。']
+    },
+    {
+      category: '人力 / 财务 / 行政',
+      title: '教育BG-分子公司财务负责人-合肥',
+      salary: '18-28K·14薪',
+      city: '合肥',
+      experience: '5-10年',
+      education: '本科',
+      summary: '负责业务预算、经营分析、营收达成、资金计划和财务经营支持。',
+      duties: ['跟踪业务年度预算执行，关注和预警营收达成风险。', '开展经营分析，揭示经营风险并提供解决方案。', '协同收入确认、成本结转、KPI 管理报表和资金计划管理。'],
+      requirements: ['财会类专业本科及以上，2 年以上财务 BP 工作经验。', '具备数据敏感性、财务分析建模和 Excel/PPT 工具能力。', '职业敏感、逻辑清晰、团队合作和跨部门沟通能力强。']
+    },
+    {
+      category: '生产制造 / 硬件',
+      title: '高级结构工程师（车载扬声器）',
+      salary: '20-35K·14薪',
+      city: '苏州',
+      experience: '5-10年',
+      education: '本科',
+      summary: '负责车载扬声器结构设计、性能对标、仿真、开发项目跟踪和量产交付。',
+      duties: ['对接客户需求，完成扬声器前期车中结构布置工作。', '输出可行性评估、设计方案、DFMEA、开发计划和 2D/3D 图纸。', '负责性能对标、结构仿真、打样摸底、DV 试验和项目交付管控。'],
+      requirements: ['本科及以上，机械、声学、机电一体化等相关专业。', '有车载扬声器设计经验或主观听音经验优先。', '熟悉 3D 软件、有限元仿真、扬声器测量和可靠性设计。']
+    },
+    {
+      category: '医疗健康',
+      title: '讯飞医疗-AI 医学知识专家-合肥/广州/珠海',
+      salary: '15-30K',
+      city: '合肥',
+      experience: '3-5年',
+      education: '硕士',
+      summary: '面向医院和医学研究单位，建设医学知识数据、知识图谱和医学 AI 能力。',
+      duties: ['理解客户深度需求，输出医学知识数据等解决方案。', '负责医学逻辑、知识图谱、医学人工智能技术中的知识构建和数据标注。', '辅助医学专家和研究人员完成产品、工程交叉任务并支持前瞻技术研究。'],
+      requirements: ['全日制临床医学、预防医学、卫生统计、生物医学等硕士及以上。', '熟悉临床科研方法、医学统计、数据分析和医学成果转化。', '具备临床医学、疾控或科研相关岗位经验优先。']
+    }
+  ];
+
+  const jobsEl = document.getElementById('jobs');
+  const emptyEl = document.getElementById('empty');
+  const searchEl = document.getElementById('search');
+  const categoryEl = document.getElementById('categoryFilter');
+  const salaryEl = document.getElementById('salaryFilter');
+  const toast = document.getElementById('toast');
+
+  const categories = ['全部方向', ...new Set(jobs.map(job => job.category))];
+  categoryEl.innerHTML = categories.map((name, index) => `<option value="${index ? name : ''}">${name}</option>`).join('');
+
+  function maxSalary(job) {
+    const numbers = job.salary.match(/\d+/g) || [];
+    return Math.max(...numbers.map(Number));
+  }
+
+  function matchSalary(job, filter) {
+    const max = maxSalary(job);
+    if (filter === 'lt20') return max < 20;
+    if (filter === '20to35') return max >= 20 && max <= 35;
+    if (filter === '35plus') return max > 35;
+    return true;
+  }
+
+  function copyText(job) {
+    return [
+      job.title,
+      `薪资：${job.salary}`,
+      `城市：${job.city}｜经验：${job.experience}｜学历：${job.education}`,
+      '',
+      '岗位职责',
+      ...job.duties.map((item, index) => `${index + 1}. ${item}`),
+      '',
+      '岗位要求',
+      ...job.requirements.map((item, index) => `${index + 1}. ${item}`)
+    ].join('\n');
+  }
+
+  function render() {
+    const keyword = searchEl.value.trim().toLowerCase();
+    const category = categoryEl.value;
+    const salary = salaryEl.value;
+    const filtered = jobs.filter(job => {
+      const haystack = [job.category, job.title, job.salary, job.city, job.experience, job.education, job.summary, ...job.duties, ...job.requirements].join(' ').toLowerCase();
+      return (!keyword || haystack.includes(keyword)) &&
+        (!category || job.category === category) &&
+        matchSalary(job, salary);
+    });
+
+    jobsEl.innerHTML = filtered.map((job, index) => `
+      <article class="job-card">
+        <div class="card-top">
+          <div class="top-row">
+            <span class="index">#${String(index + 1).padStart(2, '0')}</span>
+            <span class="salary">${job.salary}</span>
+          </div>
+          <h2>${job.title}</h2>
+          <div class="meta">
+            <span>${job.category}</span>
+            <span>${job.city}</span>
+            <span>${job.experience}</span>
+            <span>${job.education}</span>
+          </div>
+          <p class="summary">${job.summary}</p>
+        </div>
+        <div class="content">
+          <section class="block">
+            <h3>岗位职责</h3>
+            <ul>${job.duties.map(item => `<li>${item}</li>`).join('')}</ul>
+          </section>
+          <section class="block">
+            <h3>岗位要求</h3>
+            <ul>${job.requirements.map(item => `<li>${item}</li>`).join('')}</ul>
+          </section>
+        </div>
+        <button class="copy-btn" data-index="${jobs.indexOf(job)}">复制岗位信息</button>
+      </article>
+    `).join('');
+    emptyEl.style.display = filtered.length ? 'none' : 'block';
+  }
+
+  function showToast(text) {
+    toast.textContent = text;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 1400);
+  }
+
+  jobsEl.addEventListener('click', async event => {
+    const button = event.target.closest('.copy-btn');
+    if (!button) return;
+    const job = jobs[Number(button.dataset.index)];
+    try {
+      await navigator.clipboard.writeText(copyText(job));
+    } catch (error) {
+      const area = document.createElement('textarea');
+      area.value = copyText(job);
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand('copy');
+      document.body.removeChild(area);
+    }
+    const old = button.textContent;
+    button.textContent = '已复制';
+    showToast(`已复制：${job.title}`);
+    setTimeout(() => button.textContent = old, 1200);
+  });
+
+  [searchEl, categoryEl, salaryEl].forEach(input => input.addEventListener('input', render));
+  render();
+</script>
+</body>
+</html>
