@@ -14,45 +14,47 @@
         body {
             font-family: 'Microsoft YaHei', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            overflow: hidden;
+            padding: 10px;
         }
 
         .game-container {
             background: white;
-            border-radius: 20px;
-            padding: 40px;
+            border-radius: 16px;
+            padding: clamp(16px, 3vh, 30px);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             text-align: center;
             max-width: 500px;
-            width: 100%;
+            width: min(100%, 92vw);
+            max-height: calc(100vh - 20px);
         }
 
         h1 {
             color: #333;
-            margin-bottom: 10px;
-            font-size: 2em;
+            margin-bottom: 6px;
+            font-size: clamp(24px, 4vh, 32px);
         }
 
         .subtitle {
             color: #666;
-            margin-bottom: 30px;
-            font-size: 0.95em;
+            margin-bottom: clamp(12px, 2vh, 22px);
+            font-size: clamp(13px, 1.9vh, 15px);
         }
 
         .game-area {
-            margin: 30px 0;
+            margin: clamp(12px, 2.3vh, 22px) 0;
         }
 
         #reaction-btn {
-            width: 200px;
-            height: 200px;
+            width: clamp(126px, 25vh, 190px);
+            height: clamp(126px, 25vh, 190px);
             border-radius: 50%;
             border: none;
-            font-size: 1.2em;
+            font-size: clamp(16px, 2.4vh, 20px);
             font-weight: bold;
             cursor: pointer;
             transition: all 0.1s ease;
@@ -87,31 +89,31 @@
         }
 
         .result-area {
-            margin-top: 30px;
-            min-height: 120px;
+            margin-top: clamp(12px, 2vh, 22px);
+            min-height: clamp(74px, 13vh, 110px);
         }
 
         .reaction-time {
-            font-size: 3em;
+            font-size: clamp(32px, 6vh, 48px);
             font-weight: bold;
             color: #333;
-            margin: 10px 0;
+            margin: 6px 0;
         }
 
         .rating {
-            font-size: 1.5em;
+            font-size: clamp(18px, 3vh, 24px);
             font-weight: bold;
-            padding: 10px 20px;
+            padding: 8px 18px;
             border-radius: 25px;
             display: inline-block;
-            margin-top: 10px;
+            margin-top: 6px;
         }
 
         .rating-sub {
-            font-size: 0.9em;
+            font-size: clamp(12px, 1.9vh, 14px);
             color: #666;
-            margin-top: 8px;
-            line-height: 1.5;
+            margin-top: 6px;
+            line-height: 1.4;
             max-width: 320px;
             margin-left: auto;
             margin-right: auto;
@@ -144,14 +146,14 @@
 
         .instructions {
             color: #666;
-            margin-top: 20px;
-            font-size: 0.9em;
-            line-height: 1.6;
+            margin-top: clamp(10px, 1.8vh, 16px);
+            font-size: clamp(12px, 1.8vh, 14px);
+            line-height: 1.45;
         }
 
         .stats {
-            margin-top: 20px;
-            padding-top: 20px;
+            margin-top: clamp(10px, 1.8vh, 16px);
+            padding-top: clamp(10px, 1.8vh, 16px);
             border-top: 1px solid #eee;
             display: flex;
             justify-content: space-around;
@@ -164,26 +166,26 @@
         }
 
         .stat-value {
-            font-size: 1.5em;
+            font-size: clamp(18px, 3vh, 24px);
             font-weight: bold;
             color: #667eea;
         }
 
         .stat-label {
-            font-size: 0.8em;
+            font-size: clamp(11px, 1.6vh, 13px);
             color: #999;
-            margin-top: 5px;
+            margin-top: 3px;
         }
 
         .reset-btn {
-            margin-top: 20px;
-            padding: 10px 30px;
+            margin-top: clamp(10px, 1.8vh, 16px);
+            padding: 8px 26px;
             background: #667eea;
             color: white;
             border: none;
             border-radius: 25px;
             cursor: pointer;
-            font-size: 1em;
+            font-size: clamp(14px, 2vh, 16px);
             transition: background 0.3s;
         }
 

@@ -1109,6 +1109,506 @@
     color:rgba(245,247,251,.76);
   }
 
+  /* ---------- Platform page（平台认知页） ---------- */
+  .platform-slide{
+    background:
+      radial-gradient(circle at 16% 24%,rgba(143,217,255,.2),transparent 30%),
+      radial-gradient(circle at 78% 18%,rgba(215,184,255,.2),transparent 28%),
+      radial-gradient(circle at 72% 86%,rgba(164,255,232,.12),transparent 30%),
+      linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px),
+      #040506;
+    background-size:auto,auto,auto,34px 34px,34px 34px,auto;
+  }
+
+  .platform-main{
+    display:grid;
+    grid-template-columns:minmax(0,48fr) minmax(0,52fr);
+    gap:4vw;
+    align-items:center;
+    min-height:77vh;
+    padding:3.6vh 0 2.4vh;
+  }
+
+  .platform-kicker{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:2.6vh;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:rgba(180,214,255,.72);
+  }
+
+  .platform-kicker::before{
+    content:"";
+    width:42px;
+    height:1px;
+    background:linear-gradient(90deg,var(--holo-cyan),var(--holo-violet));
+  }
+
+  .platform-title{
+    font-family:var(--serif-zh);
+    font-size:clamp(72px,8.8vw,136px);
+    font-weight:700;
+    line-height:.94;
+    letter-spacing:0;
+    color:#fff;
+    text-shadow:0 0 42px rgba(143,217,255,.24),0 30px 72px rgba(0,0,0,.42);
+  }
+
+  .platform-subtitle{
+    max-width:38vw;
+    margin-top:3.2vh;
+    font-family:var(--sans-zh);
+    font-size:clamp(18px,1.55vw,26px);
+    line-height:1.65;
+    color:rgba(245,247,251,.78);
+  }
+
+  .platform-tiles{
+    display:grid;
+    gap:1.6vh;
+  }
+
+  .platform-tile{
+    position:relative;
+    overflow:hidden;
+    padding:3.2vh 2.4vw;
+    border:1px solid var(--tile-line);
+    border-radius:8px;
+    background:
+      linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.055) 44%,rgba(255,255,255,.15)),
+      repeating-linear-gradient(90deg,rgba(255,255,255,.13) 0 1px,transparent 1px 14px),
+      repeating-linear-gradient(0deg,rgba(255,255,255,.09) 0 1px,transparent 1px 14px);
+    box-shadow:var(--glow);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+  }
+
+  .platform-tile::after{
+    content:"";
+    position:absolute;
+    inset:-42% -24%;
+    background:linear-gradient(112deg,transparent 0 42%,rgba(255,255,255,.3) 48%,transparent 56% 100%);
+    opacity:.32;
+    pointer-events:none;
+    mix-blend-mode:screen;
+  }
+
+  .platform-tile-label{
+    position:relative;
+    z-index:1;
+    margin-bottom:1.2vh;
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:rgba(180,214,255,.72);
+  }
+
+  .platform-tile-body{
+    position:relative;
+    z-index:1;
+    font-family:var(--sans-zh);
+    font-size:clamp(22px,2.1vw,34px);
+    line-height:1.3;
+    color:#fff;
+  }
+
+  .platform-link{
+    color:#fff;
+    text-decoration:none;
+    border-bottom:1px solid rgba(143,217,255,.72);
+    text-shadow:0 0 22px rgba(143,217,255,.28);
+  }
+
+  /* ---------- Showcase page（作品展示页） ---------- */
+  .showcase-main{
+    position:relative;
+    display:flex;
+    min-height:77vh;
+    align-items:center;
+    justify-content:center;
+    padding:4vh 0 2.8vh;
+  }
+
+  .showcase-main::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:6%;
+    width:64vw;
+    height:62vh;
+    transform:translateX(-50%);
+    background:
+      linear-gradient(100deg,transparent 0 38%,rgba(143,217,255,.2) 43%,transparent 51%),
+      linear-gradient(80deg,transparent 0 43%,rgba(215,184,255,.22) 49%,transparent 58%),
+      radial-gradient(ellipse at 50% 100%,rgba(198,255,240,.18),transparent 58%);
+    clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);
+    opacity:.8;
+    pointer-events:none;
+  }
+
+  .showcase-stage{
+    position:relative;
+    width:min(74vw,1120px);
+    min-height:56vh;
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+    align-items:center;
+    justify-items:center;
+    padding:5.8vh 5vw 3.8vh;
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:8px;
+    background:
+      linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.04) 48%,rgba(255,255,255,.12)),
+      repeating-linear-gradient(90deg,rgba(255,255,255,.11) 0 1px,transparent 1px 18px),
+      repeating-linear-gradient(0deg,rgba(255,255,255,.08) 0 1px,transparent 1px 18px);
+    box-shadow:0 0 52px rgba(143,217,255,.18),0 34px 90px rgba(0,0,0,.38);
+    overflow:hidden;
+  }
+
+  .showcase-stage::after{
+    content:"";
+    position:absolute;
+    left:7%;
+    right:7%;
+    bottom:7%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(143,217,255,.82),rgba(215,184,255,.7),transparent);
+    box-shadow:0 0 24px rgba(143,217,255,.44);
+  }
+
+  .showcase-kicker{
+    position:relative;
+    z-index:1;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:rgba(180,214,255,.72);
+  }
+
+  .showcase-title{
+    position:relative;
+    z-index:1;
+    margin:4.5vh 0;
+    font-family:var(--serif-zh);
+    font-size:clamp(86px,10vw,156px);
+    font-weight:700;
+    line-height:.92;
+    letter-spacing:0;
+    color:#fff;
+    text-align:center;
+    text-shadow:0 0 44px rgba(143,217,255,.26),0 30px 72px rgba(0,0,0,.46);
+  }
+
+  .showcase-strip{
+    position:relative;
+    z-index:1;
+    display:grid;
+    grid-template-columns:repeat(3,auto);
+    gap:12px;
+  }
+
+  .showcase-chip{
+    padding:10px 14px;
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:4px;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:rgba(245,247,251,.82);
+    background:rgba(255,255,255,.07);
+  }
+
+  .showcase-line{
+    position:absolute;
+    inset:auto 16% 17%;
+    height:8vh;
+    border:1px solid rgba(143,217,255,.28);
+    border-top:0;
+    opacity:.72;
+  }
+
+  /* ---------- Closing page（结束页） ---------- */
+  .closing-main{
+    position:relative;
+    min-height:77vh;
+    display:grid;
+    grid-template-rows:1fr auto;
+    padding:4vh 0 2.8vh;
+  }
+
+  .closing-center{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+  }
+
+  .closing-center::before{
+    content:"";
+    position:absolute;
+    width:min(64vw,980px);
+    aspect-ratio:1;
+    border:1px solid rgba(143,217,255,.22);
+    transform:rotate(45deg);
+    background:
+      linear-gradient(135deg,rgba(143,217,255,.08),rgba(215,184,255,.06),transparent 62%),
+      linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:auto,22px 22px,22px 22px;
+    box-shadow:0 0 54px rgba(143,217,255,.16);
+    opacity:.8;
+  }
+
+  .closing-kicker{
+    position:relative;
+    z-index:1;
+    margin-bottom:2.8vh;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:rgba(180,214,255,.72);
+  }
+
+  .closing-title{
+    position:relative;
+    z-index:1;
+    font-family:var(--serif-zh);
+    font-size:clamp(78px,9vw,142px);
+    font-weight:700;
+    line-height:.95;
+    letter-spacing:0;
+    color:#fff;
+    text-shadow:0 0 44px rgba(143,217,255,.26),0 32px 72px rgba(0,0,0,.46);
+  }
+
+  .closing-mantra{
+    position:relative;
+    z-index:1;
+    margin-top:3.6vh;
+    padding:12px 18px;
+    border:1px solid rgba(198,255,240,.36);
+    border-radius:4px;
+    font-family:var(--sans-zh);
+    font-size:clamp(22px,2vw,34px);
+    font-weight:700;
+    color:#fff;
+    background:linear-gradient(135deg,rgba(198,255,240,.16),rgba(215,184,255,.12));
+    box-shadow:0 0 34px rgba(143,217,255,.2);
+  }
+
+  .closing-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    position:relative;
+    z-index:1;
+  }
+
+  .closing-tile{
+    min-height:12vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:2.2vh 1.8vw;
+    border:1px solid var(--tile-line);
+    border-radius:8px;
+    font-family:var(--sans-zh);
+    font-size:clamp(17px,1.45vw,24px);
+    line-height:1.45;
+    color:rgba(245,247,251,.88);
+    text-align:center;
+    background:
+      linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.045) 48%,rgba(255,255,255,.12)),
+      repeating-linear-gradient(90deg,rgba(255,255,255,.1) 0 1px,transparent 1px 14px);
+    box-shadow:var(--glow);
+  }
+
+  /* ---------- Mission page（实操任务页） ---------- */
+  .mission-main{
+    display:grid;
+    grid-template-columns:minmax(0,40fr) minmax(0,60fr);
+    gap:3.6vw;
+    align-items:stretch;
+    min-height:77vh;
+    padding:3.8vh 0 2.4vh;
+  }
+
+  .mission-brief{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    overflow:hidden;
+    padding:4.2vh 2.8vw;
+    border:1px solid var(--tile-line-strong);
+    border-radius:8px;
+    background:
+      linear-gradient(135deg,rgba(255,255,255,.24),rgba(255,255,255,.055) 44%,rgba(255,255,255,.16)),
+      repeating-linear-gradient(90deg,rgba(255,255,255,.15) 0 1px,transparent 1px 16px),
+      repeating-linear-gradient(0deg,rgba(255,255,255,.1) 0 1px,transparent 1px 16px);
+    box-shadow:var(--glow);
+  }
+
+  .mission-brief::after{
+    content:"";
+    position:absolute;
+    inset:-36% -42%;
+    background:linear-gradient(112deg,transparent 0 42%,rgba(255,255,255,.34) 48%,transparent 56% 100%);
+    opacity:.36;
+    pointer-events:none;
+    mix-blend-mode:screen;
+  }
+
+  .mission-code{
+    position:relative;
+    z-index:1;
+    font-family:var(--mono);
+    font-size:max(11px,.82vw);
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:rgba(180,214,255,.72);
+  }
+
+  .mission-title{
+    position:relative;
+    z-index:1;
+    font-family:var(--serif-zh);
+    font-size:clamp(72px,8vw,124px);
+    font-weight:700;
+    line-height:.95;
+    letter-spacing:0;
+    color:#fff;
+    text-shadow:0 0 42px rgba(143,217,255,.24),0 30px 72px rgba(0,0,0,.42);
+  }
+
+  .mission-badge{
+    position:relative;
+    z-index:1;
+    width:max-content;
+    padding:10px 14px;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:#071018;
+    background:linear-gradient(135deg,#fff,#bfe8ff 48%,#e1c8ff);
+    border-radius:4px;
+    box-shadow:0 0 26px rgba(143,217,255,.24);
+  }
+
+  .mission-action{
+    position:relative;
+    z-index:1;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:max-content;
+    min-height:48px;
+    padding:0 20px;
+    border:1px solid rgba(255,255,255,.48);
+    border-radius:6px;
+    font-family:var(--sans-zh);
+    font-size:16px;
+    font-weight:700;
+    letter-spacing:.08em;
+    color:#061018;
+    text-decoration:none;
+    background:linear-gradient(135deg,#ffffff,#bfe8ff 45%,#e1c8ff 76%,#c6fff0);
+    box-shadow:0 0 28px rgba(143,217,255,.26),0 16px 38px rgba(0,0,0,.24);
+  }
+
+  .mission-action::after{
+    content:"";
+    width:18px;
+    height:18px;
+    margin-left:10px;
+    background:linear-gradient(135deg,#071018,#27394d);
+    clip-path:polygon(28% 18%,82% 50%,28% 82%);
+  }
+
+  .mission-flow{
+    display:grid;
+    grid-template-rows:1fr 1fr 1fr;
+    gap:1.6vh;
+  }
+
+  .mission-step{
+    position:relative;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:1.6vw;
+    align-items:center;
+    overflow:hidden;
+    padding:2.8vh 2.4vw;
+    border:1px solid var(--tile-line);
+    border-radius:8px;
+    background:
+      linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,.045) 42%,rgba(255,255,255,.14)),
+      repeating-linear-gradient(90deg,rgba(255,255,255,.13) 0 1px,transparent 1px 14px),
+      repeating-linear-gradient(0deg,rgba(255,255,255,.09) 0 1px,transparent 1px 14px);
+    box-shadow:var(--glow);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+  }
+
+  .mission-step::after{
+    content:"";
+    position:absolute;
+    inset:-42% -24%;
+    background:linear-gradient(112deg,transparent 0 42%,rgba(255,255,255,.28) 48%,transparent 56% 100%);
+    opacity:.3;
+    pointer-events:none;
+    mix-blend-mode:screen;
+  }
+
+  .mission-step-num{
+    position:relative;
+    z-index:1;
+    display:grid;
+    place-items:center;
+    width:72px;
+    aspect-ratio:1;
+    border:1px solid rgba(255,255,255,.34);
+    border-radius:8px;
+    font-family:var(--serif-en);
+    font-size:38px;
+    font-weight:800;
+    color:#fff;
+    background:rgba(255,255,255,.08);
+    text-shadow:0 0 24px rgba(143,217,255,.24);
+  }
+
+  .mission-step-kicker{
+    position:relative;
+    z-index:1;
+    margin-bottom:.8vh;
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:rgba(180,214,255,.72);
+  }
+
+  .mission-step-text{
+    position:relative;
+    z-index:1;
+    font-family:var(--sans-zh);
+    font-size:clamp(24px,2.3vw,38px);
+    line-height:1.28;
+    color:#fff;
+  }
+
   video{
     border-radius:8px;
     border:1px solid var(--tile-line-strong) !important;
@@ -1185,6 +1685,26 @@
     width:100%;
     height:100%;
     object-fit:contain;
+  }
+
+  .game-frame{
+    width:min(78vw,124vh);
+    aspect-ratio:16/9;
+  }
+
+  .game-frame iframe{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    width:100%;
+    height:100%;
+    border:0;
+    background:#040506;
+  }
+
+  .game-frame-portrait{
+    width:min(72vw,96vh);
+    aspect-ratio:4/3;
   }
 
   /* ---------- Image focus page（单图展示页） ---------- */
@@ -1622,6 +2142,251 @@
   </div>
   <div class="foot">
     <div></div>
+  </div>
+</section>
+
+<section class="slide hero dark platform-slide">
+  <div class="chrome">
+    <div>宝贝走天下</div>
+    <div>Trae</div>
+  </div>
+  <div class="platform-main">
+    <div class="platform-copy" data-anim>
+      <div class="platform-kicker">AI Coding Platform</div>
+      <h2 class="platform-title">Trae</h2>
+    </div>
+    <div class="platform-tiles">
+      <div class="platform-tile" data-anim>
+        <div class="platform-tile-label">Creator</div>
+        <div class="platform-tile-body">字节跳动开发的 AI coding 软件</div>
+      </div>
+      <div class="platform-tile" data-anim>
+        <div class="platform-tile-label">Workflow</div>
+        <div class="platform-tile-body">支持浏览器直接编辑</div>
+      </div>
+      <div class="platform-tile" data-anim>
+        <div class="platform-tile-label">Website</div>
+        <div class="platform-tile-body">
+          <a class="platform-link" href="https://solo.trae.cn/" target="_blank" rel="noreferrer">solo.trae.cn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot">
+    <div>AI Coding 工具认知</div>
+  </div>
+</section>
+
+<section class="slide hero dark platform-slide">
+  <div class="chrome">
+    <div>宝贝走天下</div>
+    <div>Task</div>
+  </div>
+  <div class="mission-main">
+    <div class="mission-brief" data-anim>
+      <div class="mission-code">Hands-on Mission</div>
+      <h2 class="mission-title">任务<br>说明</h2>
+      <a
+        class="mission-action"
+        href="https://bbztx.yuque.com/kzne1o/kqto0n/teww1lw467g1biy6"
+        target="_blank"
+        rel="noreferrer"
+      >任务完成步骤</a>
+    </div>
+    <div class="mission-flow">
+      <div class="mission-step" data-anim>
+        <div class="mission-step-num">01</div>
+        <div>
+          <div class="mission-step-kicker">Team</div>
+          <div class="mission-step-text">3 人 / 组</div>
+        </div>
+      </div>
+      <div class="mission-step" data-anim>
+        <div class="mission-step-num">02</div>
+        <div>
+          <div class="mission-step-kicker">Deliverable</div>
+          <div class="mission-step-text">以小组为单位完成个人简历制作</div>
+        </div>
+      </div>
+      <div class="mission-step" data-anim>
+        <div class="mission-step-num">03</div>
+        <div>
+          <div class="mission-step-kicker">Reward</div>
+          <div class="mission-step-text">根据制作结果发放宝贝币</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot">
+    <div>实操任务</div>
+  </div>
+</section>
+
+<section class="slide hero dark chapter-slide">
+  <div class="chrome">
+    <div>宝贝走天下</div>
+    <div>03</div>
+  </div>
+  <div class="chapter-main">
+    <div class="chapter-number-tile" data-anim>
+      <div class="chapter-index">Practice</div>
+      <div class="chapter-number">03</div>
+      <div class="chapter-chip">Game</div>
+    </div>
+    <div class="chapter-copy" data-anim>
+      <div class="chapter-kicker">Hands-on Project</div>
+      <h2 class="chapter-title">
+        实操二：小游戏制作
+      </h2>
+      <div class="chapter-subline">
+        <span>用 AI 辅助完成一个可运行、可体验、可迭代的网页小游戏。</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot">
+    <div>03</div>
+  </div>
+</section>
+
+<section class="slide hero dark video-only-slide">
+  <div class="chrome">
+    <div>宝贝走天下</div>
+    <div>Game Demo</div>
+  </div>
+  <div class="video-stage">
+    <div class="video-frame game-frame" data-anim>
+      <iframe
+        src="/Users/shaliji/Downloads/AI 课程/AI 编程课程/小猫接雨滴.html"
+        title="小猫接雨滴小游戏"
+      ></iframe>
+    </div>
+  </div>
+  <div class="foot">
+    <div>小猫接雨滴</div>
+  </div>
+</section>
+
+<section class="slide hero dark video-only-slide">
+  <div class="chrome">
+    <div>宝贝走天下</div>
+    <div>Game Demo</div>
+  </div>
+  <div class="video-stage">
+    <div class="video-frame game-frame game-frame-portrait" data-anim>
+      <iframe
+        src="/Users/shaliji/Downloads/AI 课程/AI 编程课程/躲避障碍「最终版」.html"
+        title="躲避障碍小游戏"
+      ></iframe>
+    </div>
+  </div>
+  <div class="foot">
+    <div>躲避障碍</div>
+  </div>
+</section>
+
+<section class="slide hero dark video-only-slide">
+  <div class="chrome">
+    <div>宝贝走天下</div>
+    <div>Game Demo</div>
+  </div>
+  <div class="video-stage">
+    <div class="video-frame game-frame" data-anim>
+      <iframe
+        src="/Users/shaliji/Downloads/AI 课程/AI 编程课程/反应力测试.html"
+        title="反应力测试小游戏"
+      ></iframe>
+    </div>
+  </div>
+  <div class="foot">
+    <div>反应力测试</div>
+  </div>
+</section>
+
+<section class="slide hero dark platform-slide">
+  <div class="chrome">
+    <div>宝贝走天下</div>
+    <div>Task</div>
+  </div>
+  <div class="mission-main">
+    <div class="mission-brief" data-anim>
+      <div class="mission-code">Game Mission</div>
+      <h2 class="mission-title">任务<br>说明</h2>
+      <a
+        class="mission-action"
+        href="https://bbztx.yuque.com/kzne1o/kqto0n/rs1gsgk4r1y64s5t"
+        target="_blank"
+        rel="noreferrer"
+      >任务完成步骤</a>
+    </div>
+    <div class="mission-flow">
+      <div class="mission-step" data-anim>
+        <div class="mission-step-num">01</div>
+        <div>
+          <div class="mission-step-kicker">Base Version</div>
+          <div class="mission-step-text">完成一个基础版的小游戏</div>
+        </div>
+      </div>
+      <div class="mission-step" data-anim>
+        <div class="mission-step-num">02</div>
+        <div>
+          <div class="mission-step-kicker">Iteration</div>
+          <div class="mission-step-text">按照要求完成迭代</div>
+        </div>
+      </div>
+      <div class="mission-step" data-anim>
+        <div class="mission-step-num">03</div>
+        <div>
+          <div class="mission-step-kicker">Reward</div>
+          <div class="mission-step-text">根据任务结果发放宝贝币</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot">
+    <div>小游戏任务</div>
+  </div>
+</section>
+
+<section class="slide hero dark platform-slide">
+  <div class="chrome">
+    <div>宝贝走天下</div>
+    <div>Showcase</div>
+  </div>
+  <div class="showcase-main">
+    <div class="showcase-stage" data-anim>
+      <div class="showcase-kicker">Project Showcase</div>
+      <h2 class="showcase-title">作品展示<br>环节</h2>
+      <div class="showcase-strip">
+        <div class="showcase-chip">Group Stage</div>
+        <div class="showcase-chip">Live Demo</div>
+        <div class="showcase-chip">AI Coding</div>
+      </div>
+      <div class="showcase-line"></div>
+    </div>
+  </div>
+  <div class="foot">
+    <div>作品展示</div>
+  </div>
+</section>
+
+<section class="slide hero dark platform-slide">
+  <div class="chrome">
+    <div>宝贝走天下</div>
+    <div>Summary</div>
+  </div>
+  <div class="closing-main">
+    <div class="closing-center" data-anim>
+      <h2 class="closing-title">AI 是起点<br>不是终点</h2>
+      <div class="closing-mantra">动手做，才真正懂 AI 能做什么</div>
+    </div>
+    <div class="closing-grid">
+      <div class="closing-tile" data-anim>勇敢迈出动手的第一步</div>
+      <div class="closing-tile" data-anim>持续学习，才能看懂 AI 给的答案</div>
+      <div class="closing-tile" data-anim>你懂得越多，AI 能帮你做的越多</div>
+    </div>
+  </div>
+  <div class="foot">
+    <div>课程总结</div>
   </div>
 </section>
 
