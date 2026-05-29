@@ -181,7 +181,7 @@
   body.light-bg #nav{background:rgba(255,255,255,.25)}
   body.light-bg #nav .dot{background:rgba(var(--ink-rgb),.25)}
   body.light-bg #nav .dot.active{background:rgba(var(--ink-rgb),.9)}
-  #hint{position:fixed;bottom:3vh;right:3vw;z-index:30;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.4;mix-blend-mode:difference;color:#aaa}
+  #hint{display:none}
 
   /* ============================================================
      ============ LAYOUTS API · 面向 agent 的类（v2）============
@@ -525,6 +525,23 @@
     text-transform:none;
   }
 
+  .clean-foot-right{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:9px;
+  }
+
+  .clean-hint{
+    font-family:var(--mono);
+    font-size:10px;
+    font-weight:400;
+    line-height:1;
+    letter-spacing:.2em;
+    color:rgba(255,255,255,.58);
+    white-space:nowrap;
+  }
+
   .clean-rule{
     width:220px;
     height:6px;
@@ -539,6 +556,10 @@
   .clean-agenda .clean-chrome,
   .clean-agenda .clean-foot{
     color:rgba(var(--ink-rgb),.58);
+  }
+
+  .clean-agenda .clean-hint{
+    color:rgba(var(--ink-rgb),.46);
   }
 
   .clean-agenda-layout{
@@ -649,15 +670,6 @@
     background:var(--red);
   }
 
-  #hint{
-    top:58px;
-    right:48px;
-    bottom:auto;
-    color:rgba(255,255,255,.58);
-    mix-blend-mode:normal;
-    opacity:1;
-  }
-
   #nav{
     background:rgba(17,17,16,.14);
   }
@@ -692,7 +704,7 @@
     .clean-agenda-text{font-size:clamp(21px, 6.5vw, 30px); margin-top:18px}
     .clean-agenda-desc{display:none}
     .clean-agenda-rule{width:116px}
-    #hint{display:none}
+    .clean-hint{display:none}
   }
 
 </style>
@@ -701,7 +713,6 @@
 
 <canvas id="bg-dark" class="bg"></canvas>
 <canvas id="bg-light" class="bg"></canvas>
-<div id="hint">← → 翻页 · ESC 索引</div>
 
 <div id="deck">
 
@@ -723,7 +734,10 @@
   </div>
   <div class="foot clean-foot">
     <div>首页</div>
-    <div class="clean-rule"></div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-rule"></div>
+    </div>
   </div>
 </section>
 
@@ -763,7 +777,10 @@
   </div>
   <div class="foot clean-foot">
     <div>目录</div>
-    <div class="clean-agenda-rule"></div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
   </div>
 </section>
 
