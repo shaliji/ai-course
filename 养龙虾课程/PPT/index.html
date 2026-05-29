@@ -402,14 +402,14 @@
      - hero(hero 页自动):慢一点的 stagger 180ms
      - quote(含 [data-anim="line"]):逐行 600ms 淡入
      - directional(含 [data-anim="left|right"]):左→分隔线→右
-     - pipeline(data-animate="pipeline"):Space/→ 手动推进
+     - pipeline(data-animate="pipeline"):Space/→ 手动推进,未触发前完全隐藏
      Motion One 没加载成功时(CDN 断 + 本地丢),所有 [data-anim] 会兜底显示。
   */
   [data-anim]{opacity:0}
   [data-anim="left"]{transform:translateX(-24px)}
   [data-anim="right"]{transform:translateX(24px)}
   [data-anim="line"]{opacity:0;transform:translateY(10px)}
-  [data-animate="pipeline"] [data-anim]{opacity:.15}
+  [data-animate="pipeline"] [data-anim]{opacity:0}
 
   /* ---------- 响应式降级 ---------- */
   @media (max-width:900px){
@@ -501,6 +501,39 @@
     letter-spacing:0;
     color:#fff;
     max-width:980px;
+  }
+
+  .clean-section{
+    background:
+      radial-gradient(circle at 82% 24%, rgba(255,255,255,.18), transparent 24%),
+      linear-gradient(135deg, var(--ink) 0%, #191715 42%, var(--red) 100%);
+    color:#fff;
+  }
+
+  .clean-section-main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    width:100%;
+    max-width:1220px;
+    margin:0 auto;
+    padding-bottom:4vh;
+  }
+
+  .clean-section-title{
+    margin-top:22px;
+    font-family:var(--sans-zh);
+    font-size:clamp(56px, 6.8vw, 108px);
+    font-weight:900;
+    line-height:1.03;
+    letter-spacing:0;
+    color:#fff;
+    max-width:1120px;
+  }
+
+  .clean-section-title span{
+    color:var(--orange);
   }
 
   .clean-chip{
@@ -671,6 +704,1070 @@
     background:var(--red);
   }
 
+  .clean-profile{
+    background:var(--paper);
+    color:var(--ink);
+  }
+
+  .clean-profile .clean-chrome,
+  .clean-profile .clean-foot{
+    color:rgba(var(--ink-rgb),.58);
+  }
+
+  .clean-profile .clean-hint{
+    color:rgba(var(--ink-rgb),.46);
+  }
+
+  .clean-profile-layout{
+    flex:1;
+    display:grid;
+    grid-template-columns:minmax(0, .9fr) minmax(520px, .95fr);
+    align-items:center;
+    gap:4.4vw;
+    width:100%;
+    max-width:1320px;
+    margin:0 auto;
+  }
+
+  .clean-profile-name{
+    font-family:var(--sans-zh);
+    font-size:clamp(58px, 8.4vw, 118px);
+    font-weight:900;
+    line-height:.98;
+    letter-spacing:0;
+    color:var(--ink);
+  }
+
+  .clean-profile-alias{
+    display:inline-flex;
+    align-items:center;
+    margin-top:26px;
+    background:var(--red);
+    color:#fff;
+    padding:12px 18px;
+    font-family:var(--sans-zh);
+    font-size:clamp(17px, 1.6vw, 22px);
+    font-weight:800;
+    line-height:1;
+  }
+
+  .clean-profile-card{
+    background:#fff;
+    color:var(--ink);
+    border-top:10px solid var(--ink);
+    padding:0;
+  }
+
+  .clean-profile-meta{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    background:var(--ink);
+    color:#fff;
+    padding:26px 34px 24px;
+    font-family:var(--mono);
+    font-size:13px;
+    font-weight:700;
+    line-height:1;
+    letter-spacing:.16em;
+    margin-bottom:0;
+  }
+
+  .clean-profile-meta::after{
+    content:"03";
+    color:var(--orange);
+  }
+
+  .clean-profile-list{
+    list-style:none;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:0;
+    margin:0;
+    padding:0;
+    background:#fff;
+    border-left:2px solid var(--paper-tint);
+    border-right:2px solid var(--paper-tint);
+    border-bottom:2px solid var(--paper-tint);
+  }
+
+  .clean-profile-item{
+    display:grid;
+    grid-template-columns:112px minmax(0, 1fr);
+    align-items:center;
+    gap:30px;
+    background:#fff;
+    color:var(--ink);
+    min-height:138px;
+    padding:34px 34px;
+    border-top:2px solid var(--paper-tint);
+  }
+
+  .clean-profile-item.dark{
+    background:#fff;
+    color:var(--ink);
+  }
+
+  .clean-profile-label{
+    display:block;
+    font-family:var(--mono);
+    font-size:12px;
+    font-weight:700;
+    line-height:1;
+    letter-spacing:.16em;
+    color:var(--coral);
+  }
+
+  .clean-profile-item.dark .clean-profile-label{
+    color:var(--red);
+  }
+
+  .clean-profile-item.dark .clean-profile-text{
+    color:var(--red);
+  }
+
+  .clean-profile-text{
+    font-family:var(--sans-zh);
+    font-size:clamp(25px, 2.3vw, 38px);
+    font-weight:800;
+    line-height:1.24;
+    letter-spacing:0;
+  }
+
+  .clean-question{
+    background:var(--paper);
+    color:var(--ink);
+  }
+
+  .clean-question .clean-chrome,
+  .clean-question .clean-foot{
+    color:rgba(var(--ink-rgb),.58);
+  }
+
+  .clean-question .clean-hint{
+    color:rgba(var(--ink-rgb),.46);
+  }
+
+  .clean-question-layout{
+    flex:1;
+    display:grid;
+    grid-template-columns:minmax(0, .88fr) minmax(520px, 1.05fr);
+    align-items:center;
+    gap:4.8vw;
+    width:100%;
+    max-width:1360px;
+    margin:0 auto;
+  }
+
+  .clean-question-layout-solo{
+    grid-template-columns:minmax(0, 980px);
+    justify-content:center;
+  }
+
+  .clean-question-title{
+    font-family:var(--sans-zh);
+    font-size:clamp(54px, 7.4vw, 112px);
+    font-weight:900;
+    line-height:.98;
+    letter-spacing:0;
+    color:var(--ink);
+  }
+
+  .clean-question-title mark{
+    display:inline-block;
+    margin-top:18px;
+    padding:10px 16px 12px;
+    background:var(--red);
+    color:#fff;
+  }
+
+  .clean-question-stack{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .clean-question-card{
+    display:grid;
+    grid-template-columns:92px minmax(0, 1fr);
+    align-items:center;
+    min-height:188px;
+    background:#fff;
+    border:2px solid var(--paper-tint);
+  }
+
+  .clean-question-num{
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--ink);
+    color:#fff;
+    font-family:var(--mono);
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:.18em;
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+  }
+
+  .clean-question-card.featured .clean-question-num{
+    background:var(--red);
+  }
+
+  .clean-question-text{
+    padding:34px 38px;
+    font-family:var(--sans-zh);
+    font-size:clamp(26px, 2.55vw, 42px);
+    font-weight:850;
+    line-height:1.22;
+    letter-spacing:0;
+    color:var(--ink);
+  }
+
+  .clean-question-apps{
+    color:var(--red);
+  }
+
+  .clean-image{
+    background:var(--paper);
+    color:var(--ink);
+  }
+
+  .clean-image .clean-chrome,
+  .clean-image .clean-foot{
+    color:rgba(var(--ink-rgb),.58);
+  }
+
+  .clean-image .clean-hint{
+    color:rgba(var(--ink-rgb),.46);
+  }
+
+  .clean-image-layout{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    min-height:0;
+    padding:22px 0 36px;
+  }
+
+  .clean-image-frame{
+    width:min(86vw, calc(76vh * 1.218));
+    max-width:1120px;
+    aspect-ratio:1245 / 1022;
+    background:#fff;
+    border:2px solid var(--paper-tint);
+    box-shadow:0 16px 0 rgba(var(--ink-rgb),.08);
+    overflow:hidden;
+  }
+
+  .clean-image-frame img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:contain;
+  }
+
+  .clean-video{
+    background:var(--paper);
+    color:var(--ink);
+  }
+
+  .clean-video .clean-chrome,
+  .clean-video .clean-foot{
+    color:rgba(var(--ink-rgb),.58);
+  }
+
+  .clean-video .clean-hint{
+    color:rgba(var(--ink-rgb),.46);
+  }
+
+  .clean-video-layout{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    min-height:0;
+    padding:18px 0 34px;
+  }
+
+  .clean-video-frame{
+    width:min(86vw, calc(76vh * 1.777));
+    max-width:1260px;
+    aspect-ratio:16 / 9;
+    background:#000;
+    border:2px solid var(--paper-tint);
+    box-shadow:0 16px 0 rgba(var(--ink-rgb),.08);
+    overflow:hidden;
+  }
+
+  .clean-video-frame video{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:contain;
+    background:#000;
+  }
+
+  .clean-core{
+    background:var(--paper);
+    color:var(--ink);
+  }
+
+  .clean-core .clean-chrome,
+  .clean-core .clean-foot{
+    color:rgba(var(--ink-rgb),.58);
+  }
+
+  .clean-core .clean-hint{
+    color:rgba(var(--ink-rgb),.46);
+  }
+
+  .clean-core-layout{
+    flex:1;
+    display:grid;
+    grid-template-columns:minmax(360px, .82fr) minmax(420px, 1fr);
+    align-items:center;
+    gap:52px;
+    width:100%;
+    max-width:1260px;
+    margin:0 auto;
+    min-height:0;
+  }
+
+  .clean-core-copy{
+    align-self:center;
+  }
+
+  .clean-core-title{
+    margin-top:18px;
+    font-family:var(--sans-zh);
+    font-size:clamp(48px, 5.4vw, 86px);
+    font-weight:900;
+    line-height:.98;
+    letter-spacing:0;
+    color:var(--ink);
+  }
+
+  .clean-core-title mark{
+    display:inline-block;
+    margin-top:16px;
+    padding:8px 14px 10px;
+    background:var(--red);
+    color:#fff;
+  }
+
+  .clean-core-meta{
+    display:grid;
+    grid-template-columns:112px minmax(0, 1fr);
+    margin-top:38px;
+    border:2px solid var(--paper-tint);
+    background:#fff;
+  }
+
+  .clean-core-meta span{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--ink);
+    color:#fff;
+    font-family:var(--mono);
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.18em;
+  }
+
+  .clean-core-meta strong{
+    padding:24px 26px;
+    font-family:var(--sans-zh);
+    font-size:clamp(22px, 1.75vw, 32px);
+    font-weight:850;
+    line-height:1.22;
+  }
+
+  .clean-core-figure{
+    justify-self:end;
+    width:min(35vw, calc(74vh * .75));
+    max-width:560px;
+    aspect-ratio:1086 / 1448;
+    margin:0;
+    background:#fff;
+    border:2px solid var(--paper-tint);
+    box-shadow:16px 16px 0 rgba(var(--ink-rgb),.08);
+    overflow:hidden;
+  }
+
+  .clean-core-figure img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:contain;
+  }
+
+  .clean-dialog{
+    background:var(--paper);
+    color:var(--ink);
+  }
+
+  .clean-dialog .clean-chrome,
+  .clean-dialog .clean-foot{
+    color:rgba(var(--ink-rgb),.58);
+  }
+
+  .clean-dialog .clean-hint{
+    color:rgba(var(--ink-rgb),.46);
+  }
+
+  .clean-dialog-layout{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:28px;
+    width:100%;
+    max-width:1320px;
+    margin:0 auto;
+    min-height:0;
+  }
+
+  .clean-dialog-head{
+    display:grid;
+    grid-template-columns:auto minmax(0, 1fr);
+    align-items:end;
+    gap:30px;
+  }
+
+  .clean-dialog-tag{
+    display:grid;
+    place-items:center;
+    width:104px;
+    height:104px;
+    background:var(--red);
+    color:#fff;
+    font-family:var(--mono);
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:.16em;
+  }
+
+  .clean-dialog-title{
+    font-family:var(--sans-zh);
+    font-size:clamp(36px, 4.2vw, 68px);
+    font-weight:900;
+    line-height:1.04;
+    letter-spacing:0;
+    color:var(--ink);
+  }
+
+  .clean-dialog-title span{
+    color:var(--red);
+  }
+
+  .clean-dialog-frame{
+    width:100%;
+    aspect-ratio:3 / 2;
+    margin:0;
+    background:#fff;
+    border:2px solid var(--paper-tint);
+    box-shadow:0 16px 0 rgba(var(--ink-rgb),.08);
+    overflow:hidden;
+  }
+
+  .clean-dialog-frame img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:contain;
+  }
+
+  .clean-experience{
+    background:var(--paper);
+    color:var(--ink);
+  }
+
+  .clean-experience .clean-chrome,
+  .clean-experience .clean-foot{
+    color:rgba(var(--ink-rgb),.58);
+  }
+
+  .clean-experience .clean-hint{
+    color:rgba(var(--ink-rgb),.46);
+  }
+
+  .clean-experience-layout{
+    flex:1;
+    display:grid;
+    grid-template-columns:minmax(360px, .78fr) minmax(520px, 1fr);
+    align-items:center;
+    gap:58px;
+    width:100%;
+    max-width:1320px;
+    margin:0 auto;
+    min-height:0;
+  }
+
+  .clean-experience-kicker{
+    font-family:var(--mono);
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:.22em;
+    color:var(--red);
+  }
+
+  .clean-experience-title{
+    margin-top:28px;
+    font-family:var(--sans-zh);
+    font-size:clamp(54px, 6vw, 98px);
+    font-weight:900;
+    line-height:.96;
+    letter-spacing:0;
+  }
+
+  .clean-experience-title span{
+    display:inline-block;
+    margin-top:14px;
+    padding:8px 16px 12px;
+    background:var(--red);
+    color:#fff;
+  }
+
+  .clean-experience-note{
+    margin-top:38px;
+    max-width:460px;
+    border-left:10px solid var(--ink);
+    padding:16px 0 16px 24px;
+    font-family:var(--sans-zh);
+    font-size:clamp(22px, 2vw, 34px);
+    font-weight:850;
+    line-height:1.18;
+  }
+
+  .clean-experience-steps{
+    display:grid;
+    gap:18px;
+    margin:0;
+    padding:0;
+    list-style:none;
+  }
+
+  .clean-experience-step{
+    display:grid;
+    grid-template-columns:104px minmax(0, 1fr);
+    min-height:136px;
+    border:2px solid var(--paper-tint);
+    background:#fff;
+    box-shadow:10px 10px 0 rgba(var(--ink-rgb),.06);
+  }
+
+  .clean-experience-step strong{
+    display:grid;
+    place-items:center;
+    background:var(--ink);
+    color:#fff;
+    font-family:var(--mono);
+    font-size:18px;
+    font-weight:900;
+    letter-spacing:.18em;
+  }
+
+  .clean-experience-step:first-child strong{
+    background:var(--red);
+  }
+
+  .clean-experience-step div{
+    display:flex;
+    align-items:center;
+    padding:26px 30px;
+    font-family:var(--sans-zh);
+    font-size:clamp(28px, 2.6vw, 46px);
+    font-weight:900;
+    line-height:1.12;
+  }
+
+  .clean-experience-step em{
+    font-style:normal;
+    color:var(--red);
+  }
+
+  .clean-agent-task{
+    background:var(--paper);
+    color:var(--ink);
+  }
+
+  .clean-agent-task .clean-chrome,
+  .clean-agent-task .clean-foot{
+    color:rgba(var(--ink-rgb),.58);
+  }
+
+  .clean-agent-task .clean-hint{
+    color:rgba(var(--ink-rgb),.46);
+  }
+
+  .clean-agent-task-layout{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:30px;
+    width:100%;
+    max-width:1220px;
+    margin:0 auto;
+    min-height:0;
+  }
+
+  .clean-agent-task-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:28px;
+    border-bottom:2px solid var(--paper-tint);
+    padding-bottom:22px;
+  }
+
+  .clean-agent-task-label{
+    font-family:var(--mono);
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:.22em;
+    color:var(--red);
+  }
+
+  .clean-agent-task-title{
+    font-family:var(--sans-zh);
+    font-size:clamp(30px, 3vw, 48px);
+    font-weight:900;
+    line-height:1.04;
+    letter-spacing:0;
+    text-align:right;
+  }
+
+  .clean-agent-task-title span{
+    color:var(--red);
+  }
+
+  .clean-agent-task-board{
+    display:grid;
+    grid-template-columns:120px minmax(0, 1fr);
+    min-height:360px;
+    background:var(--ink);
+    color:#fff;
+    border:2px solid var(--ink);
+    box-shadow:16px 16px 0 rgba(var(--ink-rgb),.1);
+  }
+
+  .clean-agent-task-index{
+    display:grid;
+    place-items:center;
+    border-right:2px solid rgba(255,255,255,.2);
+    font-family:var(--mono);
+    font-size:clamp(34px, 4vw, 58px);
+    font-weight:900;
+    letter-spacing:.08em;
+  }
+
+  .clean-agent-task-main{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:42px 48px;
+  }
+
+  .clean-agent-task-caption{
+    font-family:var(--mono);
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:.22em;
+    color:var(--warm);
+  }
+
+  .clean-agent-task-main p{
+    margin:0;
+    margin-top:18px;
+    font-family:var(--sans-zh);
+    font-size:clamp(48px, 5.5vw, 86px);
+    font-weight:900;
+    line-height:1.02;
+  }
+
+  .clean-agent-task-action{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:28px;
+    border:2px solid var(--paper-tint);
+    background:#fff;
+    padding:22px 24px 22px 30px;
+  }
+
+  .clean-agent-task-action span{
+    font-family:var(--sans-zh);
+    font-size:clamp(22px, 2vw, 34px);
+    font-weight:900;
+    line-height:1.1;
+  }
+
+  .clean-agent-task-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 auto;
+    min-height:68px;
+    padding:0 30px;
+    background:var(--red);
+    color:#fff;
+    font-family:var(--sans-zh);
+    font-size:clamp(20px, 1.7vw, 28px);
+    font-weight:900;
+    line-height:1;
+    text-decoration:none;
+    border:0;
+  }
+
+  .clean-agent-task-button::after{
+    content:"↗";
+    margin-left:14px;
+    font-family:var(--mono);
+    font-size:.9em;
+  }
+
+  .clean-skill{
+    background:var(--paper);
+    color:var(--ink);
+  }
+
+  .clean-skill .clean-chrome,
+  .clean-skill .clean-foot{
+    color:rgba(var(--ink-rgb),.58);
+  }
+
+  .clean-skill .clean-hint{
+    color:rgba(var(--ink-rgb),.46);
+  }
+
+  .clean-skill-layout{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:26px;
+    width:100%;
+    max-width:1340px;
+    margin:0 auto;
+    min-height:0;
+  }
+
+  .clean-skill-head{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) auto;
+    align-items:end;
+    gap:28px;
+  }
+
+  .clean-skill-title{
+    font-family:var(--sans-zh);
+    font-size:clamp(54px, 5.6vw, 92px);
+    font-weight:900;
+    line-height:.98;
+    letter-spacing:0;
+  }
+
+  .clean-skill-title span{
+    color:var(--red);
+  }
+
+  .clean-skill-badge{
+    min-width:138px;
+    padding:18px 20px;
+    background:var(--ink);
+    color:#fff;
+    font-family:var(--mono);
+    font-size:14px;
+    font-weight:900;
+    letter-spacing:.2em;
+    text-align:center;
+  }
+
+  .clean-skill-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+    min-height:0;
+  }
+
+  .clean-skill-figure{
+    margin:0;
+    background:#fff;
+    border:2px solid var(--paper-tint);
+    box-shadow:10px 10px 0 rgba(var(--ink-rgb),.07);
+    overflow:hidden;
+  }
+
+  .clean-skill-figure img{
+    width:100%;
+    aspect-ratio:1239 / 994;
+    display:block;
+    object-fit:contain;
+  }
+
+  .clean-skill-caption{
+    display:flex;
+    align-items:center;
+    min-height:58px;
+    padding:0 20px;
+    border-top:2px solid var(--paper-tint);
+    font-family:var(--sans-zh);
+    font-size:clamp(18px, 1.45vw, 26px);
+    font-weight:900;
+  }
+
+  .clean-skill-caption span{
+    color:var(--red);
+  }
+
+  .clean-summary{
+    background:var(--paper);
+    color:var(--ink);
+  }
+
+  .clean-summary .clean-chrome,
+  .clean-summary .clean-foot{
+    color:rgba(var(--ink-rgb),.58);
+  }
+
+  .clean-summary .clean-hint{
+    color:rgba(var(--ink-rgb),.46);
+  }
+
+  .clean-summary-layout{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:34px;
+    width:100%;
+    max-width:1240px;
+    margin:0 auto;
+    min-height:0;
+  }
+
+  .clean-summary-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:32px;
+  }
+
+  .clean-summary-kicker{
+    font-family:var(--mono);
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:.22em;
+    color:var(--red);
+  }
+
+  .clean-summary-mark{
+    width:112px;
+    height:112px;
+    display:grid;
+    place-items:center;
+    background:var(--ink);
+    color:#fff;
+    font-family:var(--mono);
+    font-size:14px;
+    font-weight:900;
+    letter-spacing:.18em;
+    text-align:center;
+  }
+
+  .clean-summary-title{
+    max-width:920px;
+    font-family:var(--sans-zh);
+    font-size:clamp(48px, 5.6vw, 92px);
+    font-weight:900;
+    line-height:.98;
+    letter-spacing:0;
+  }
+
+  .clean-summary-title span{
+    color:var(--red);
+  }
+
+  .clean-summary-body{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+    margin-top:4px;
+  }
+
+  .clean-summary-card{
+    min-height:190px;
+    padding:28px 30px;
+    background:#fff;
+    border:2px solid var(--paper-tint);
+    box-shadow:10px 10px 0 rgba(var(--ink-rgb),.06);
+  }
+
+  .clean-summary-card.featured{
+    background:var(--red);
+    border-color:var(--red);
+    color:#fff;
+  }
+
+  .clean-summary-card strong{
+    display:block;
+    margin-bottom:16px;
+    font-family:var(--mono);
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:.2em;
+  }
+
+  .clean-summary-card p{
+    margin:0;
+    font-family:var(--sans-zh);
+    font-size:clamp(24px, 2.3vw, 38px);
+    font-weight:900;
+    line-height:1.16;
+  }
+
+  .clean-summary-line{
+    height:8px;
+    width:100%;
+    background:linear-gradient(90deg, var(--red) 0 34%, var(--ink) 34% 100%);
+  }
+
+  .clean-demos{
+    background:var(--paper);
+    color:var(--ink);
+  }
+
+  .clean-demos .clean-chrome,
+  .clean-demos .clean-foot{
+    color:rgba(var(--ink-rgb),.58);
+  }
+
+  .clean-demos .clean-hint{
+    color:rgba(var(--ink-rgb),.46);
+  }
+
+  .clean-demos-layout{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:26px;
+    width:100%;
+    max-width:1260px;
+    margin:0 auto;
+  }
+
+  .clean-demos-head{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) auto;
+    align-items:end;
+    gap:36px;
+  }
+
+  .clean-demos-title{
+    font-family:var(--sans-zh);
+    font-size:clamp(46px, 5.8vw, 88px);
+    font-weight:900;
+    line-height:.98;
+    letter-spacing:0;
+    color:var(--ink);
+  }
+
+  .clean-demos-title mark{
+    display:inline-block;
+    margin-top:16px;
+    padding:8px 14px 10px;
+    background:var(--red);
+    color:#fff;
+  }
+
+  .clean-demos-note{
+    width:260px;
+    padding:18px 20px;
+    background:var(--ink);
+    color:#fff;
+    font-family:var(--sans-zh);
+    font-size:18px;
+    font-weight:800;
+    line-height:1.28;
+  }
+
+  .clean-demos-note span{
+    display:block;
+    margin-bottom:10px;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.18em;
+    color:var(--orange);
+  }
+
+  .clean-demos-list{
+    list-style:none;
+    display:grid;
+    grid-template-columns:1fr;
+    align-items:stretch;
+    gap:8px;
+    margin:0;
+    padding:0;
+    counter-reset:demo;
+  }
+
+  .clean-demo-item{
+    counter-increment:demo;
+    display:grid;
+    grid-template-columns:86px minmax(0, 1fr);
+    align-items:center;
+    min-height:76px;
+    background:#fff;
+    border:2px solid var(--paper-tint);
+  }
+
+  .clean-demo-item::before{
+    content:counter(demo, decimal-leading-zero);
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    background:var(--ink);
+    color:#fff;
+    font-family:var(--mono);
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:.14em;
+  }
+
+  .clean-demo-item.featured::before{
+    background:var(--red);
+  }
+
+  .clean-demo-item.wide{
+    grid-column:auto;
+  }
+
+  .clean-demo-text{
+    display:flex;
+    align-items:center;
+    padding:16px 24px;
+    font-family:var(--sans-zh);
+    font-size:clamp(21px, 1.65vw, 29px);
+    font-weight:820;
+    line-height:1.22;
+    letter-spacing:0;
+  }
+
+  .clean-demo-text span{
+    color:var(--red);
+  }
+
   #nav{
     background:rgba(17,17,16,.14);
   }
@@ -689,6 +1786,8 @@
   @media (max-width:900px){
     .slide{padding:18px 22px 22px}
     .clean-rule{width:116px}
+    .clean-section-main{padding-bottom:2vh}
+    .clean-section-title{font-size:clamp(42px, 12vw, 72px)}
     .clean-agenda-layout{
       gap:22px;
       justify-content:center;
@@ -702,9 +1801,224 @@
       min-height:auto;
       padding:22px 20px;
     }
-    .clean-agenda-text{font-size:clamp(21px, 6.5vw, 30px); margin-top:18px}
+    .clean-agenda-text{font-size:clamp(21px, 6.5vw, 30px); margin-top:0}
     .clean-agenda-desc{display:none}
     .clean-agenda-rule{width:116px}
+    .clean-profile-layout{
+      grid-template-columns:1fr;
+      gap:24px;
+      justify-content:center;
+    }
+    .clean-profile-name{font-size:clamp(52px, 16vw, 86px)}
+    .clean-profile-alias{margin-top:16px}
+    .clean-profile-card{border-top-width:6px}
+    .clean-profile-meta{padding:16px 18px 15px}
+    .clean-profile-item{
+      grid-template-columns:1fr;
+      gap:12px;
+      padding:18px;
+    }
+    .clean-profile-text{font-size:clamp(18px, 5.8vw, 26px)}
+    .clean-question-layout{
+      grid-template-columns:1fr;
+      gap:24px;
+      justify-content:center;
+    }
+    .clean-question-title{font-size:clamp(42px, 12vw, 72px)}
+    .clean-question-title mark{margin-top:10px;padding:7px 10px 9px}
+    .clean-question-card{
+      grid-template-columns:58px minmax(0, 1fr);
+      min-height:128px;
+    }
+    .clean-question-text{
+      padding:20px;
+      font-size:clamp(20px, 6.2vw, 30px);
+    }
+    .clean-image-layout{padding:10px 0 24px}
+    .clean-image-frame{
+      width:min(92vw, calc(74vh * 1.218));
+      box-shadow:0 10px 0 rgba(var(--ink-rgb),.08);
+    }
+    .clean-video-layout{padding:10px 0 24px}
+    .clean-video-frame{
+      width:min(92vw, calc(74vh * 1.777));
+      box-shadow:0 10px 0 rgba(var(--ink-rgb),.08);
+    }
+    .clean-core-layout{
+      grid-template-columns:1fr;
+      gap:18px;
+      align-content:center;
+      max-width:760px;
+    }
+    .clean-core-title{font-size:clamp(38px, 10vw, 64px)}
+    .clean-core-title mark{margin-top:10px;padding:6px 9px 8px}
+    .clean-core-meta{
+      grid-template-columns:72px minmax(0, 1fr);
+      margin-top:22px;
+    }
+    .clean-core-meta strong{
+      padding:16px 18px;
+      font-size:clamp(18px, 5vw, 25px);
+    }
+    .clean-core-figure{
+      justify-self:center;
+      width:min(70vw, calc(44vh * .75));
+      max-width:360px;
+      box-shadow:10px 10px 0 rgba(var(--ink-rgb),.08);
+    }
+    .clean-dialog-layout{
+      gap:16px;
+      justify-content:center;
+    }
+    .clean-dialog-head{
+      grid-template-columns:64px minmax(0, 1fr);
+      gap:14px;
+    }
+    .clean-dialog-tag{
+      width:64px;
+      height:64px;
+      font-size:10px;
+    }
+    .clean-dialog-title{
+      font-size:clamp(26px, 8vw, 42px);
+    }
+    .clean-dialog-frame{
+      box-shadow:0 10px 0 rgba(var(--ink-rgb),.08);
+    }
+    .clean-experience-layout{
+      grid-template-columns:1fr;
+      gap:28px;
+    }
+    .clean-experience-note{
+      margin-top:22px;
+      max-width:none;
+    }
+    .clean-experience-step{
+      grid-template-columns:76px minmax(0, 1fr);
+      min-height:104px;
+    }
+    .clean-experience-step div{
+      padding:20px 22px;
+      font-size:clamp(23px, 5vw, 34px);
+    }
+    .clean-agent-task-layout{
+      gap:22px;
+    }
+    .clean-agent-task-head{
+      align-items:flex-start;
+      flex-direction:column;
+      gap:14px;
+    }
+    .clean-agent-task-title{
+      text-align:left;
+      font-size:clamp(28px, 8vw, 46px);
+    }
+    .clean-agent-task-board{
+      grid-template-columns:76px minmax(0, 1fr);
+      min-height:240px;
+    }
+    .clean-agent-task-main{
+      padding:26px 24px;
+    }
+    .clean-agent-task-main p{
+      font-size:clamp(34px, 10vw, 58px);
+    }
+    .clean-agent-task-action{
+      align-items:stretch;
+      flex-direction:column;
+      gap:18px;
+      padding:20px;
+    }
+    .clean-agent-task-button{
+      min-height:62px;
+      width:100%;
+    }
+    .clean-skill-layout{
+      gap:18px;
+    }
+    .clean-skill-head{
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+    .clean-skill-title{
+      font-size:clamp(38px, 10vw, 64px);
+    }
+    .clean-skill-badge{
+      width:max-content;
+      min-width:0;
+      padding:12px 14px;
+      font-size:11px;
+    }
+    .clean-skill-grid{
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+    .clean-skill-caption{
+      min-height:46px;
+      padding:0 14px;
+      font-size:clamp(16px, 4.6vw, 22px);
+    }
+    .clean-summary-layout{
+      gap:22px;
+    }
+    .clean-summary-top{
+      align-items:flex-start;
+      flex-direction:column;
+      gap:16px;
+    }
+    .clean-summary-mark{
+      width:78px;
+      height:78px;
+      font-size:11px;
+    }
+    .clean-summary-title{
+      font-size:clamp(38px, 10vw, 66px);
+    }
+    .clean-summary-body{
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+    .clean-summary-card{
+      min-height:0;
+      padding:20px;
+    }
+    .clean-summary-card p{
+      font-size:clamp(20px, 5.8vw, 30px);
+    }
+    .clean-demos-layout{
+      gap:20px;
+      justify-content:center;
+    }
+    .clean-demos-head{
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+    .clean-demos-title{font-size:clamp(36px, 10vw, 62px)}
+    .clean-demos-title mark{margin-top:10px;padding:6px 9px 8px}
+    .clean-demos-note{
+      width:auto;
+      padding:12px 14px;
+      font-size:15px;
+    }
+    .clean-demos-list{
+      grid-template-columns:1fr;
+      gap:8px;
+    }
+    .clean-demo-item{
+      min-height:64px;
+      display:grid;
+      grid-template-columns:52px minmax(0, 1fr);
+    }
+    .clean-demo-item::before{
+      height:100%;
+      padding:0;
+      justify-content:center;
+    }
+    .clean-demo-text{
+      display:flex;
+      padding:13px 14px;
+      font-size:clamp(17px, 5vw, 23px);
+    }
     .clean-hint{display:none}
   }
 
@@ -775,6 +2089,586 @@
   </div>
   <div class="foot clean-foot">
     <div>目录</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-profile" data-theme="light" data-title="个人介绍" data-section="PROFILE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-profile-layout">
+    <div>
+      <div class="clean-kicker" data-anim>PROFILE · 03</div>
+      <h2 class="clean-profile-name" data-anim>郑伟杰</h2>
+      <div class="clean-profile-alias" data-anim>花名：莎莉鸡</div>
+    </div>
+    <div class="clean-profile-card" data-anim>
+      <div class="clean-profile-meta">PRODUCT / AI / SYSTEM</div>
+      <ul class="clean-profile-list">
+        <li class="clean-profile-item">
+          <span class="clean-profile-label">EXPERIENCE</span>
+          <div class="clean-profile-text">资深互联网产品经理</div>
+        </li>
+        <li class="clean-profile-item dark">
+          <span class="clean-profile-label">YEARS</span>
+          <div class="clean-profile-text">6年+ APP &amp; 系统产品策划经验</div>
+        </li>
+        <li class="clean-profile-item">
+          <span class="clean-profile-label">FOCUS</span>
+          <div class="clean-profile-text">负责宝贝走天下系统及企业 AI 功能落地</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot clean-foot">
+    <div>个人介绍</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide dark clean-section" data-theme="dark" data-title="龙虾是什么" data-section="OPENCLAW">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-section-main">
+    <div class="clean-kicker" data-anim>OPENCLAW · 04</div>
+    <h2 class="clean-section-title" data-anim>龙虾<br><span>是什么</span></h2>
+  </div>
+  <div class="foot clean-foot">
+    <div>龙虾是什么</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-question" data-theme="light" data-title="龙虾是什么？" data-section="OPENCLAW" data-animate="pipeline" data-start-step="1">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-question-layout clean-question-layout-solo">
+    <div class="clean-question-stack">
+      <article class="clean-question-card" data-anim="step">
+        <div class="clean-question-num">Q01</div>
+        <div class="clean-question-text">
+          大家是否用过 <span class="clean-question-apps">豆包、DeepSeek、元宝？</span>
+        </div>
+      </article>
+      <article class="clean-question-card featured" data-anim="step">
+        <div class="clean-question-num">Q02</div>
+        <div class="clean-question-text">
+          大家认为这几个和龙虾的区别在哪里？
+        </div>
+      </article>
+    </div>
+  </div>
+  <div class="foot clean-foot">
+    <div>龙虾是什么？</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-video" data-theme="light" data-title="龙虾介绍视频" data-section="OPENCLAW">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-video-layout" data-anim>
+    <figure class="clean-video-frame">
+      <video src="video/龙虾介绍.mov" controls preload="metadata" playsinline></video>
+    </figure>
+  </div>
+  <div class="foot clean-foot">
+    <div>龙虾介绍视频</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-image" data-theme="light" data-title="OpenClaw 和 Chatbot 的区别" data-section="OPENCLAW">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-image-layout" data-anim>
+    <figure class="clean-image-frame">
+      <img src="images/05-openclaw-vs-chatbot.png" alt="OpenClaw 和 Chatbot 的区别">
+    </figure>
+  </div>
+  <div class="foot clean-foot">
+    <div>OpenClaw 和 Chatbot 的区别</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-demos" data-theme="light" data-title="OpenClaw 能做什么" data-section="DEMO" data-animate="pipeline">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-demos-layout">
+    <div class="clean-demos-head">
+      <div>
+        <div class="clean-kicker">DEMO · 08</div>
+        <h2 class="clean-demos-title">通过案例了解<br><mark>OpenClaw能做什么？</mark></h2>
+      </div>
+    </div>
+    <ol class="clean-demos-list">
+      <li class="clean-demo-item featured" data-anim="step">
+        <div class="clean-demo-text">打开网易云音乐，播放<span>林俊杰的歌</span></div>
+      </li>
+      <li class="clean-demo-item" data-anim="step">
+        <div class="clean-demo-text">找到指定文件，并通过<span>手机发给我</span></div>
+      </li>
+      <li class="clean-demo-item wide" data-anim="step">
+        <div class="clean-demo-text">整理文件：<span>识别图片</span>，再按要求重新命名</div>
+      </li>
+      <li class="clean-demo-item" data-anim="step">
+        <div class="clean-demo-text">记录内容至 Excel 表格：<span>需求池内容记录</span></div>
+      </li>
+      <li class="clean-demo-item" data-anim="step">
+        <div class="clean-demo-text">制定定时任务：<span>背单词提醒</span></div>
+      </li>
+    </ol>
+  </div>
+  <div class="foot clean-foot">
+    <div>OpenClaw 能做什么</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-core" data-theme="light" data-title="OpenClaw 核心功能介绍" data-section="OPENCLAW">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-core-layout">
+    <div class="clean-core-copy" data-anim>
+      <div class="clean-kicker">CORE · 09</div>
+      <h2 class="clean-core-title">OpenClaw<br><mark>核心功能介绍</mark></h2>
+    </div>
+    <figure class="clean-core-figure" data-anim>
+      <img src="images/07-openclaw-core-features.png" alt="OpenClaw 核心功能介绍">
+    </figure>
+  </div>
+  <div class="foot clean-foot">
+    <div>OpenClaw 核心功能介绍</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide hero dark clean-section" data-theme="dark" data-title="实操一：创建一个自己的专属🦞" data-section="PRACTICE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-section-main">
+    <div class="clean-kicker" data-anim>PRACTICE · 10</div>
+    <h2 class="clean-section-title" data-anim>实操一：创建一个<br>自己的专属<span>🦞</span></h2>
+  </div>
+  <div class="foot clean-foot">
+    <div>实操一</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-dialog" data-theme="light" data-title="对话布置任务" data-section="PRACTICE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-dialog-layout">
+    <div class="clean-dialog-head" data-anim>
+      <div class="clean-dialog-tag">TASK<br>11</div>
+      <h2 class="clean-dialog-title">对话 - 给自己的专属<span>龙虾</span>布置任务</h2>
+    </div>
+    <figure class="clean-dialog-frame" data-anim>
+      <img src="images/09-assign-task-dialog.png" alt="对话 - 给自己的专属龙虾布置任务">
+    </figure>
+  </div>
+  <div class="foot clean-foot">
+    <div>对话布置任务</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-dialog" data-theme="light" data-title="专家 Agent" data-section="PRACTICE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-dialog-layout">
+    <div class="clean-dialog-head" data-anim>
+      <div class="clean-dialog-tag">AGENT<br>12</div>
+      <h2 class="clean-dialog-title">专家 - 使用官方创建好的<span>专家Agent</span></h2>
+    </div>
+    <figure class="clean-dialog-frame" data-anim>
+      <img src="images/10-official-expert-agent.png" alt="专家 - 使用官方创建好的专家Agent">
+    </figure>
+  </div>
+  <div class="foot clean-foot">
+    <div>专家 Agent</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-dialog" data-theme="light" data-title="定时任务" data-section="PRACTICE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-dialog-layout">
+    <div class="clean-dialog-head" data-anim>
+      <div class="clean-dialog-tag">TASK<br>13</div>
+      <h2 class="clean-dialog-title">任务 - 我们设定好的<span>定时任务</span></h2>
+    </div>
+    <figure class="clean-dialog-frame" data-anim>
+      <img src="images/11-scheduled-task.png" alt="任务 - 我们设定好的定时任务">
+    </figure>
+  </div>
+  <div class="foot clean-foot">
+    <div>定时任务</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-dialog" data-theme="light" data-title="文件记录" data-section="PRACTICE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-dialog-layout">
+    <div class="clean-dialog-head" data-anim>
+      <div class="clean-dialog-tag">FILE<br>14</div>
+      <h2 class="clean-dialog-title">文件 - 和龙虾沟通过程中的<span>文件记录</span></h2>
+    </div>
+    <figure class="clean-dialog-frame" data-anim>
+      <img src="images/12-file-records.png" alt="文件 - 和龙虾沟通过程中的文件记录">
+    </figure>
+  </div>
+  <div class="foot clean-foot">
+    <div>文件记录</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-dialog" data-theme="light" data-title="第三方 APP 协作" data-section="PRACTICE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-dialog-layout">
+    <div class="clean-dialog-head" data-anim>
+      <div class="clean-dialog-tag">LINK<br>15</div>
+      <h2 class="clean-dialog-title">链接 - 和第三方 APP 打通<span>协作</span></h2>
+    </div>
+    <figure class="clean-dialog-frame" data-anim>
+      <img src="images/13-app-links.png" alt="链接 - 和第三方 APP 打通协作">
+    </figure>
+  </div>
+  <div class="foot clean-foot">
+    <div>第三方 APP 协作</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-dialog" data-theme="light" data-title="沟通记忆" data-section="PRACTICE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-dialog-layout">
+    <div class="clean-dialog-head" data-anim>
+      <div class="clean-dialog-tag">MEMO<br>16</div>
+      <h2 class="clean-dialog-title">记忆 - 记录沟通的细节<span>「做梦」</span></h2>
+    </div>
+    <figure class="clean-dialog-frame" data-anim>
+      <img src="images/14-memory-dream.png" alt="记忆 - 记录沟通的细节「做梦」">
+    </figure>
+  </div>
+  <div class="foot clean-foot">
+    <div>沟通记忆</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-dialog" data-theme="light" data-title="Lab 实验功能" data-section="PRACTICE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-dialog-layout">
+    <div class="clean-dialog-head" data-anim>
+      <div class="clean-dialog-tag">LAB<br>17</div>
+      <h2 class="clean-dialog-title">Lab - <span>实验功能</span></h2>
+    </div>
+    <figure class="clean-dialog-frame" data-anim>
+      <img src="images/15-lab-features.png" alt="Lab - 实验功能">
+    </figure>
+  </div>
+  <div class="foot clean-foot">
+    <div>Lab 实验功能</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-experience" data-theme="light" data-title="微信操控 Agent" data-section="EXPERIENCE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-experience-layout">
+    <div class="clean-experience-copy" data-anim>
+      <div class="clean-experience-kicker">EXPERIENCE · 18</div>
+      <h2 class="clean-experience-title">体验<br><span>使用龙虾</span></h2>
+    </div>
+    <ol class="clean-experience-steps">
+      <li class="clean-experience-step" data-anim>
+        <strong>01</strong>
+        <div>通过微信与 <em>龙虾 闲聊</em></div>
+      </li>
+      <li class="clean-experience-step" data-anim>
+        <strong>02</strong>
+        <div>安装 <em>星座测试 skill</em></div>
+      </li>
+      <li class="clean-experience-step" data-anim>
+        <strong>03</strong>
+        <div>完成 <em>星座测试</em></div>
+      </li>
+    </ol>
+  </div>
+  <div class="foot clean-foot">
+    <div>体验 · 微信操控 Agent</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-agent-task" data-theme="light" data-title="创建专属 Agent" data-section="PRACTICE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-agent-task-layout">
+    <div class="clean-agent-task-head" data-anim>
+      <div class="clean-agent-task-label">TASK · 19</div>
+      <h2 class="clean-agent-task-title">实操一 · <span>专属 Agent</span></h2>
+    </div>
+    <div class="clean-agent-task-board" data-anim>
+      <div class="clean-agent-task-index">01</div>
+      <div class="clean-agent-task-main">
+        <div class="clean-agent-task-caption">MISSION BRIEF</div>
+        <p>创建第一个<br>自己专属的 Agent</p>
+      </div>
+    </div>
+    <div class="clean-agent-task-action" data-anim>
+      <a class="clean-agent-task-button" href="https://bbztx.yuque.com/kzne1o/kqto0n/pmqgoa1bgpqumkat" target="_blank" rel="noopener noreferrer">任务完成步骤</a>
+    </div>
+  </div>
+  <div class="foot clean-foot">
+    <div>创建专属 Agent</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide dark clean-section" data-theme="dark" data-title="什么是 skill" data-section="PRACTICE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-section-main">
+    <div class="clean-kicker" data-anim>SKILL · 20</div>
+    <h2 class="clean-section-title" data-anim>什么是<br><span>skill？</span></h2>
+  </div>
+  <div class="foot clean-foot">
+    <div>什么是 skill</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-video" data-theme="light" data-title="skill 是什么视频" data-section="PRACTICE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-video-layout" data-anim>
+    <figure class="clean-video-frame">
+      <video src="video/skill 是什么.mov" controls preload="metadata" playsinline></video>
+    </figure>
+  </div>
+  <div class="foot clean-foot">
+    <div>skill 是什么视频</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-skill" data-theme="light" data-title="skill 示例" data-section="PRACTICE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-skill-layout">
+    <div class="clean-skill-grid">
+      <figure class="clean-skill-figure" data-anim>
+        <img src="images/22-skill-example-left.png" alt="skill 示例左图">
+      </figure>
+      <figure class="clean-skill-figure" data-anim>
+        <img src="images/22-skill-example-right.png" alt="skill 示例右图">
+      </figure>
+    </div>
+  </div>
+  <div class="foot clean-foot">
+    <div>skill 示例</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-agent-task" data-theme="light" data-title="创建错题集 skill" data-section="PRACTICE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-agent-task-layout">
+    <div class="clean-agent-task-head" data-anim>
+      <div class="clean-agent-task-label">TASK · 23</div>
+      <h2 class="clean-agent-task-title">实操二 · <span>错题集 skill</span></h2>
+    </div>
+    <div class="clean-agent-task-board" data-anim>
+      <div class="clean-agent-task-index">02</div>
+      <div class="clean-agent-task-main">
+        <div class="clean-agent-task-caption">MISSION BRIEF</div>
+        <p>创建一个错题集 skill<br>并完成三个任务</p>
+      </div>
+    </div>
+    <div class="clean-agent-task-action" data-anim>
+      <a class="clean-agent-task-button" href="https://bbztx.yuque.com/kzne1o/kqto0n/nmsteq6l8babgbze?singleDoc#%E3%80%8A%E8%8B%B1%E8%AF%AD%E9%94%99%E9%A2%98%E9%A2%98%20skill%20%E5%88%9B%E5%BB%BA%E3%80%8B" target="_blank" rel="noopener noreferrer">任务完成步骤</a>
+    </div>
+  </div>
+  <div class="foot clean-foot">
+    <div>创建错题集 skill</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-agenda-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide dark clean-section" data-theme="dark" data-title="作品展示环节" data-section="SHOWCASE">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-section-main">
+    <div class="clean-kicker" data-anim>SHOWCASE · 24</div>
+    <h2 class="clean-section-title" data-anim>作品展示<br><span>环节</span></h2>
+  </div>
+  <div class="foot clean-foot">
+    <div>作品展示环节</div>
+    <div class="clean-foot-right">
+      <div class="clean-hint">← → 翻页 · ESC 索引</div>
+      <div class="clean-rule"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide light clean-summary" data-theme="light" data-title="课程总结" data-section="SUMMARY">
+  <div class="chrome clean-chrome">
+    <div>宝贝走天下</div>
+    <div>OPENCLAW</div>
+  </div>
+  <div class="clean-summary-layout">
+    <div class="clean-summary-top" data-anim>
+      <div>
+        <div class="clean-summary-kicker">SUMMARY · 25</div>
+        <h2 class="clean-summary-title">AI 是工具<br><span>你才是主角</span></h2>
+      </div>
+      <div class="clean-summary-mark">KEEP<br>LEARNING</div>
+    </div>
+    <div class="clean-summary-body">
+      <div class="clean-summary-card" data-anim>
+        <strong>01 · SEE</strong>
+        <p>AI 能做的，远比大家想象的多</p>
+      </div>
+      <div class="clean-summary-card featured" data-anim>
+        <strong>02 · THINK</strong>
+        <p>想清楚你要什么，AI 才能给你真正有用的答案</p>
+      </div>
+      <div class="clean-summary-card" data-anim>
+        <strong>03 · USE</strong>
+        <p>把重复任务交给 AI，让自己的时间用在更重要的判断和创造上</p>
+      </div>
+      <div class="clean-summary-card" data-anim>
+        <strong>04 · GROW</strong>
+        <p>省下来的时间，用来学更多、做更好的事</p>
+      </div>
+    </div>
+    <div class="clean-summary-line" data-anim></div>
+  </div>
+  <div class="foot clean-foot">
+    <div>课程总结</div>
     <div class="clean-foot-right">
       <div class="clean-hint">← → 翻页 · ESC 索引</div>
       <div class="clean-agenda-rule"></div>
@@ -1054,10 +2948,14 @@ if(motion){
     const recipe = slide.dataset.animate || (slide.classList.contains('hero') ? 'hero' : 'cascade');
 
     if(recipe === 'pipeline'){
-      pipeStep = -1;
+      const startStep = Math.max(0, Math.min(Number(slide.dataset.startStep || 0), slide.querySelectorAll('[data-anim="step"]').length));
+      pipeStep = startStep - 1;
       slide.querySelectorAll('[data-anim]').forEach(el=>{
-        el.style.opacity='0.15';
+        el.style.opacity='0';
         el.style.transform='none';
+      });
+      [...slide.querySelectorAll('[data-anim="step"]')].slice(0, startStep).forEach(el=>{
+        el.style.opacity='1';
       });
       return;
     }
@@ -1102,7 +3000,7 @@ if(motion){
     const arrows = [...slide.querySelectorAll('[data-anim="arrow"]')];
     if(pipeStep >= steps.length - 1) return false;
     pipeStep++;
-    animate(steps[pipeStep], {opacity:[0.15,1], y:[8,0]}, {duration:.5, easing:EASE});
+    animate(steps[pipeStep], {opacity:[0,1], y:[8,0]}, {duration:.5, easing:EASE});
     if(pipeStep > 0 && arrows[pipeStep-1]){
       animate(arrows[pipeStep-1], {opacity:[0.15,.7]}, {duration:.3, delay:.15});
     }
