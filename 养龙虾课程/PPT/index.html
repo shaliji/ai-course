@@ -41,7 +41,7 @@
 
   /* ============ Deck 容器 + 翻页 ============ */
   /* width: NSLIDES * 100vw，会在 JS 里动态矫正 */
-  #deck{position:fixed;inset:0;width:10000vw;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .18s ease-out;z-index:10;will-change:auto}
+  #deck{position:fixed;inset:0;width:10000vw;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .28s cubic-bezier(.22,1,.36,1);z-index:10;will-change:auto}
   .slide{width:100vw;height:100vh;flex:0 0 100vw;position:relative;padding:6vh 6vw 10vh 6vw;display:flex;flex-direction:column;overflow:hidden}
   .slide.light{color:var(--ink)}
   .slide.dark{color:var(--paper)}
@@ -2986,9 +2986,11 @@ if(motion){
     if(!all.length) return;
 
     if(LOW_POWER_MODE){
-      all.forEach(el=>{
-        el.style.opacity='1';
-        el.style.transform='none';
+      const tinyOffset = recipe === 'directional' ? 10 : 8;
+      animate(all, {opacity:[0,1], y:[tinyOffset,0]}, {
+        duration:.34,
+        delay:stagger(.035, {start:.04}),
+        easing:EASE
       });
       return;
     }
@@ -3030,8 +3032,7 @@ if(motion){
     if(pipeStep >= steps.length - 1) return false;
     pipeStep++;
     if(LOW_POWER_MODE){
-      steps[pipeStep].style.opacity='1';
-      steps[pipeStep].style.transform='none';
+      animate(steps[pipeStep], {opacity:[0,1], y:[6,0]}, {duration:.28, easing:EASE});
       if(pipeStep > 0 && arrows[pipeStep-1]) arrows[pipeStep-1].style.opacity='.7';
       return true;
     }
