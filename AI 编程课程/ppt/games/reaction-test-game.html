@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>反应力测试游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 16px;
+            padding: clamp(16px, 3vh, 30px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px;
+            width: min(100%, 92vw);
+            max-height: calc(100vh - 20px);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 6px;
+            font-size: clamp(24px, 4vh, 32px);
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: clamp(12px, 2vh, 22px);
+            font-size: clamp(13px, 1.9vh, 15px);
+        }
+
+        .game-area {
+            margin: clamp(12px, 2.3vh, 22px) 0;
+        }
+
+        #reaction-btn {
+            width: clamp(126px, 25vh, 190px);
+            height: clamp(126px, 25vh, 190px);
+            border-radius: 50%;
+            border: none;
+            font-size: clamp(16px, 2.4vh, 20px);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        #reaction-btn:active {
+            transform: scale(0.95);
+        }
+
+        #reaction-btn.waiting {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+            color: white;
+        }
+
+        #reaction-btn.ready {
+            background: linear-gradient(135deg, #51cf66, #40c057);
+            color: white;
+            animation: pulse 0.5s infinite alternate;
+        }
+
+        #reaction-btn.clicked-early {
+            background: linear-gradient(135deg, #fcc419, #fab005);
+            color: white;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
+        .result-area {
+            margin-top: clamp(12px, 2vh, 22px);
+            min-height: clamp(74px, 13vh, 110px);
+        }
+
+        .reaction-time {
+            font-size: clamp(32px, 6vh, 48px);
+            font-weight: bold;
+            color: #333;
+            margin: 6px 0;
+        }
+
+        .rating {
+            font-size: clamp(18px, 3vh, 24px);
+            font-weight: bold;
+            padding: 8px 18px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 6px;
+        }
+
+        .rating-sub {
+            font-size: clamp(12px, 1.9vh, 14px);
+            color: #666;
+            margin-top: 6px;
+            line-height: 1.4;
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rating.excellent {
+            background: #d3f9d8;
+            color: #2b8a3e;
+        }
+
+        .rating.good {
+            background: #e7f5ff;
+            color: #1971c2;
+        }
+
+        .rating.average {
+            background: #fff9db;
+            color: #f08c00;
+        }
+
+        .rating.poor {
+            background: #ffe3e3;
+            color: #c92a2a;
+        }
+
+        .rating.early {
+            background: #fff3bf;
+            color: #e67700;
+        }
+
+        .instructions {
+            color: #666;
+            margin-top: clamp(10px, 1.8vh, 16px);
+            font-size: clamp(12px, 1.8vh, 14px);
+            line-height: 1.45;
+        }
+
+        .stats {
+            margin-top: clamp(10px, 1.8vh, 16px);
+            padding-top: clamp(10px, 1.8vh, 16px);
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: clamp(18px, 3vh, 24px);
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: clamp(11px, 1.6vh, 13px);
+            color: #999;
+            margin-top: 3px;
+        }
+
+        .reset-btn {
+            margin-top: clamp(10px, 1.8vh, 16px);
+            padding: 8px 26px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: clamp(14px, 2vh, 16px);
+            transition: background 0.3s;
+        }
+
+        .reset-btn:hover {
+            background: #5a6fd6;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>⚡ 反应力测试</h1>
+        <p class="subtitle">测试你的反应速度，挑战极限！</p>
+        
+        <div class="game-area">
+            <button id="reaction-btn" class="waiting">点击开始</button>
+        </div>
+
+        <div class="result-area">
+            <div id="result-text"></div>
+            <div id="reaction-time" class="reaction-time"></div>
+            <div id="rating" class="rating"></div>
+            <div id="rating-sub" class="rating-sub"></div>
+        </div>
+
+        <p class="instructions">
+            点击按钮开始，等待按钮变绿后迅速点击！<br>
+            如果在变绿前点击会被判定为抢跑哦~
+        </p>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="best-time">--</div>
+                <div class="stat-label">最佳成绩(ms)</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="avg-time">--</div>
+                <div class="stat-label">平均成绩(ms)</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="test-count">0</div>
+                <div class="stat-label">测试次数</div>
+            </div>
+        </div>
+
+        <button class="reset-btn" onclick="resetStats()">重置统计</button>
+    </div>
+
+    <script>
+        const btn = document.getElementById('reaction-btn');
+        const resultText = document.getElementById('result-text');
+        const reactionTimeEl = document.getElementById('reaction-time');
+        const ratingEl = document.getElementById('rating');
+        const ratingSubEl = document.getElementById('rating-sub');
+        const bestTimeEl = document.getElementById('best-time');
+        const avgTimeEl = document.getElementById('avg-time');
+        const testCountEl = document.getElementById('test-count');
+
+        let gameState = 'idle'; // idle, waiting, ready, finished
+        let startTime;
+        let timeoutId;
+        let reactionTimes = [];
+
+        // 评级标准（毫秒）
+        const ratingLevels = [
+            { max: 200, text: '🏆 不是哥们，你真点到了？', sub: '快到我怀疑你和按钮提前商量好了。', class: 'excellent' },
+            { max: 300, text: '⭐ 可以啊老弟', sub: '这反应速度，已经不太像刚睡醒的人了。', class: 'good' },
+            { max: 400, text: '👍 勉强算你有操作', sub: '别骄傲，隔壁同桌可能刚好手滑都比你快。', class: 'average' },
+            { max: Infinity, text: '💪 行不行呀老弟？', sub: '我奶奶抢红包都比你快，再来一把证明自己！', class: 'poor' }
+        ];
+
+        btn.addEventListener('click', handleClick);
+
+        function handleClick() {
+            switch(gameState) {
+                case 'idle':
+                case 'finished':
+                    startGame();
+                    break;
+                case 'waiting':
+                    clickedEarly();
+                    break;
+                case 'ready':
+                    finishGame();
+                    break;
+            }
+        }
+
+        function startGame() {
+            gameState = 'waiting';
+            btn.className = 'waiting';
+            btn.textContent = '等待变绿...';
+            resultText.textContent = '';
+            reactionTimeEl.textContent = '';
+            ratingEl.textContent = '';
+            ratingEl.className = 'rating';
+            ratingSubEl.textContent = '';
+
+            // 随机延迟 1.5-4 秒
+            const delay = Math.random() * 2500 + 1500;
+            
+            timeoutId = setTimeout(() => {
+                gameState = 'ready';
+                btn.className = 'ready';
+                btn.textContent = '点击！';
+                startTime = Date.now();
+            }, delay);
+        }
+
+        function clickedEarly() {
+            clearTimeout(timeoutId);
+            gameState = 'finished';
+            btn.className = 'clicked-early';
+            btn.textContent = '抢跑了！';
+            resultText.textContent = '太早了！';
+            reactionTimeEl.textContent = '';
+            ratingEl.textContent = '🚫 不是哥们，你抢啥呢？';
+            ratingEl.className = 'rating early';
+            ratingSubEl.textContent = '这是反应力测试，不是预判未来大赛！';
+        }
+
+        function finishGame() {
+            const endTime = Date.now();
+            const reactionTime = endTime - startTime;
+            
+            gameState = 'finished';
+            btn.className = 'waiting';
+            btn.textContent = '再测一次';
+            
+            // 记录成绩
+            reactionTimes.push(reactionTime);
+            updateStats();
+            
+            // 显示结果
+            resultText.textContent = '你的反应时间：';
+            reactionTimeEl.textContent = reactionTime + ' ms';
+            
+            // 评级
+            const rating = ratingLevels.find(level => reactionTime <= level.max);
+            ratingEl.textContent = rating.text;
+            ratingEl.className = 'rating ' + rating.class;
+            ratingSubEl.textContent = rating.sub;
+        }
+
+        function updateStats() {
+            const count = reactionTimes.length;
+            const best = Math.min(...reactionTimes);
+            const avg = Math.round(reactionTimes.reduce((a, b) => a + b, 0) / count);
+            
+            testCountEl.textContent = count;
+            bestTimeEl.textContent = best + 'ms';
+            avgTimeEl.textContent = avg + 'ms';
+        }
+
+        function resetStats() {
+            reactionTimes = [];
+            testCountEl.textContent = '0';
+            bestTimeEl.textContent = '--';
+            avgTimeEl.textContent = '--';
+            gameState = 'idle';
+            btn.className = 'waiting';
+            btn.textContent = '点击开始';
+            resultText.textContent = '';
+            reactionTimeEl.textContent = '';
+            ratingEl.textContent = '';
+            ratingEl.className = 'rating';
+            ratingSubEl.textContent = '';
+        }
+
+        // 防止空格键触发按钮
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && e.target === btn) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
