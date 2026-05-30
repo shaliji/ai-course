@@ -1643,6 +1643,10 @@
     padding:4vh 0 2.2vh;
   }
 
+  .video-stage.game-stage{
+    padding:2vh 0 1.2vh;
+  }
+
   .video-frame{
     position:relative;
     width:min(82vw,146vh);
@@ -1690,7 +1694,8 @@
   }
 
   .game-frame{
-    width:min(78vw,124vh);
+    width:min(82vw, calc((100vh - 20vh) * 16 / 9));
+    max-height:calc(100vh - 20vh);
     aspect-ratio:16/9;
   }
 
@@ -1705,7 +1710,14 @@
   }
 
   .game-frame-portrait{
-    width:min(72vw,96vh);
+    width:min(56vw, calc((100vh - 20vh) * 3 / 4));
+    max-height:calc(100vh - 20vh);
+    aspect-ratio:3/4;
+  }
+
+  .game-frame-standard{
+    width:min(72vw, calc((100vh - 20vh) * 4 / 3));
+    max-height:calc(100vh - 20vh);
     aspect-ratio:4/3;
   }
 
@@ -2256,8 +2268,8 @@
     <div>宝贝走天下</div>
     <div>Game Demo</div>
   </div>
-  <div class="video-stage">
-    <div class="video-frame game-frame" data-anim>
+  <div class="video-stage game-stage">
+    <div class="video-frame game-frame game-frame-portrait" data-anim>
       <iframe
         src="games/cat-rain-game.html"
         title="小猫接雨滴小游戏"
@@ -2274,8 +2286,8 @@
     <div>宝贝走天下</div>
     <div>Game Demo</div>
   </div>
-  <div class="video-stage">
-    <div class="video-frame game-frame game-frame-portrait" data-anim>
+  <div class="video-stage game-stage">
+    <div class="video-frame game-frame game-frame-standard" data-anim>
       <iframe
         src="games/dodge-obstacle-final.html"
         title="躲避障碍小游戏"
@@ -2292,8 +2304,8 @@
     <div>宝贝走天下</div>
     <div>Game Demo</div>
   </div>
-  <div class="video-stage">
-    <div class="video-frame game-frame" data-anim>
+  <div class="video-stage game-stage">
+    <div class="video-frame game-frame game-frame-standard" data-anim>
       <iframe
         src="games/reaction-test-game.html"
         title="反应力测试小游戏"
