@@ -31,23 +31,25 @@
   html,body{width:100%;height:100%;overflow:hidden;background:var(--ink);color:var(--paper);font-family:var(--sans-zh);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 
   /* ============ WebGL 双背景 ============ */
-  canvas.bg{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block;transition:opacity 1.2s ease}
+  canvas.bg{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:none;transition:opacity .2s ease}
   canvas#bg-light{opacity:0}
   canvas#bg-dark{opacity:1}
   body.light-bg canvas#bg-light{opacity:1}
   body.light-bg canvas#bg-dark{opacity:0}
+  body::before{content:"";position:fixed;inset:0;z-index:0;background:linear-gradient(135deg,#ef3329 0%,#ff805f 100%)}
+  body.light-bg::before{background:var(--paper)}
 
   /* ============ Deck 容器 + 翻页 ============ */
   /* width: NSLIDES * 100vw，会在 JS 里动态矫正 */
-  #deck{position:fixed;inset:0;width:10000vw;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .9s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
+  #deck{position:fixed;inset:0;width:10000vw;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .18s ease-out;z-index:10;will-change:auto}
   .slide{width:100vw;height:100vh;flex:0 0 100vw;position:relative;padding:6vh 6vw 10vh 6vw;display:flex;flex-direction:column;overflow:hidden}
   .slide.light{color:var(--ink)}
   .slide.dark{color:var(--paper)}
 
   /* 默认页：遮罩较厚，保证文字可读 */
   .slide::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;transition:background .7s ease}
-  .slide.light::before{background:rgba(var(--paper-rgb),.78);backdrop-filter:blur(3px)}
-  .slide.dark::before{background:rgba(var(--ink-rgb),.78);backdrop-filter:blur(3px)}
+  .slide.light::before{background:rgba(var(--paper-rgb),.9)}
+  .slide.dark::before{background:rgba(var(--ink-rgb),.86)}
   /* Hero 页：遮罩大幅降低，让 WebGL 背景明显透出 */
   .slide.hero.light::before{background:rgba(var(--paper-rgb),.16);backdrop-filter:none}
   .slide.hero.dark::before{background:rgba(var(--ink-rgb),.12);backdrop-filter:none}
@@ -174,7 +176,7 @@
   figure.tile > .frame-img{flex:0 0 auto}
 
   /* ============ 导航 ============ */
-  #nav{position:fixed;left:50%;bottom:2.6vh;transform:translateX(-50%);z-index:30;display:flex;gap:10px;padding:8px 14px;border-radius:999px;background:rgba(0,0,0,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  #nav{position:fixed;left:50%;bottom:2.6vh;transform:translateX(-50%);z-index:30;display:flex;gap:10px;padding:8px 14px;border-radius:999px;background:rgba(0,0,0,.18)}
   #nav .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .3s ease;border:0;padding:0}
   #nav .dot:hover{background:rgba(255,255,255,.5);transform:scale(1.15)}
   #nav .dot.active{background:rgba(255,255,255,.95);width:22px;border-radius:999px}
@@ -2189,7 +2191,7 @@
   </div>
   <div class="clean-video-layout" data-anim>
     <figure class="clean-video-frame">
-      <video src="video/龙虾介绍.mov" controls preload="metadata" playsinline></video>
+      <video controls preload="none" playsinline data-src="video/龙虾介绍.mov"></video>
     </figure>
   </div>
   <div class="foot clean-foot">
@@ -2550,7 +2552,7 @@
   </div>
   <div class="clean-video-layout" data-anim>
     <figure class="clean-video-frame">
-      <video src="video/skill 是什么.mov" controls preload="metadata" playsinline></video>
+      <video controls preload="none" playsinline data-src="video/skill 是什么.mov"></video>
     </figure>
   </div>
   <div class="foot clean-foot">
@@ -2754,8 +2756,11 @@ void main(){
   gl_FragColor=vec4(col,1.0);
 }`;
 
+const LOW_POWER_MODE = true;
 const mouse={x:0.5,y:0.5};
-addEventListener('mousemove',e=>{mouse.x=e.clientX/innerWidth;mouse.y=e.clientY/innerHeight});
+if(!LOW_POWER_MODE){
+  addEventListener('mousemove',e=>{mouse.x=e.clientX/innerWidth;mouse.y=e.clientY/innerHeight});
+}
 
 function bootGL(canvasId, fsSrc){
   const canvas=document.getElementById(canvasId);
@@ -2788,14 +2793,16 @@ function bootGL(canvasId, fsSrc){
     return true;
   };
 }
-const drawDark=bootGL('bg-dark',FS_DARK);
-const drawLight=bootGL('bg-light',FS_LIGHT);
-const t0=Date.now();
-(function loop(){
-  const t=(Date.now()-t0)/1000;
-  drawDark(t);drawLight(t);
-  requestAnimationFrame(loop);
-})();
+if(!LOW_POWER_MODE){
+  const drawDark=bootGL('bg-dark',FS_DARK);
+  const drawLight=bootGL('bg-light',FS_LIGHT);
+  const t0=Date.now();
+  (function loop(){
+    const t=(Date.now()-t0)/1000;
+    drawDark(t);drawLight(t);
+    requestAnimationFrame(loop);
+  })();
+}
 
 // =============== 导航（翻页 / 圆点 / 键盘 / 滚轮 / 触屏） ===============
 const deck=document.getElementById('deck');
@@ -2805,6 +2812,20 @@ let idx=0,total=slides.length,lock=false;
 
 // 关键：矫正 deck 宽度为 total * 100vw，否则翻页会错位
 deck.style.width=(total*100)+'vw';
+
+function syncSlideMedia(activeIndex){
+  slides.forEach((slide,i)=>{
+    slide.querySelectorAll('video').forEach(video=>{
+      if(i===activeIndex){
+        if(!video.src && video.dataset.src) video.src=video.dataset.src;
+        return;
+      }
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    });
+  });
+}
 
 slides.forEach((s,i)=>{
   const b=document.createElement('button');
@@ -2816,22 +2837,22 @@ slides.forEach((s,i)=>{
 function go(n){
   if(lock)return;
   idx=Math.max(0,Math.min(total-1,n));
+  syncSlideMedia(idx);
   deck.style.transform=`translateX(${-idx*100}vw)`;
   nav.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
   /* 主题切换：优先读 data-theme，其次从 class（light/dark）推断 */
   const el=slides[idx];
   const th=el.dataset.theme || (el.classList.contains('light')?'light':(el.classList.contains('dark')?'dark':'dark'));
   document.body.classList.toggle('light-bg',th==='light');
-  /* 动效：翻页过渡中段触发当前页的入场动画（由 motion-boot 注册） */
-  if(window.__playSlide) setTimeout(()=>window.__playSlide(idx), 450);
-  lock=true;setTimeout(()=>lock=false,700);
+  if(window.__playSlide) window.__playSlide(idx);
+  lock=true;setTimeout(()=>lock=false,180);
 }
 
 /* =============== ESC 索引视图 =============== */
 let overviewOn=false;
 const ov=document.createElement('div');
 ov.id='overview';
-ov.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(var(--ink-rgb),.92);backdrop-filter:blur(12px);display:none;overflow-y:auto;padding:4vh 4vw';
+ov.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(var(--ink-rgb),.96);display:none;overflow-y:auto;padding:4vh 4vw';
 document.body.appendChild(ov);
 
 function buildOverview(){
@@ -2964,6 +2985,14 @@ if(motion){
     const all = [...slide.querySelectorAll('[data-anim]')];
     if(!all.length) return;
 
+    if(LOW_POWER_MODE){
+      all.forEach(el=>{
+        el.style.opacity='1';
+        el.style.transform='none';
+      });
+      return;
+    }
+
     if(recipe === 'directional'){
       const lefts  = all.filter(el=>el.dataset.anim==='left');
       const divs   = all.filter(el=>el.dataset.anim==='divider');
@@ -3000,6 +3029,12 @@ if(motion){
     const arrows = [...slide.querySelectorAll('[data-anim="arrow"]')];
     if(pipeStep >= steps.length - 1) return false;
     pipeStep++;
+    if(LOW_POWER_MODE){
+      steps[pipeStep].style.opacity='1';
+      steps[pipeStep].style.transform='none';
+      if(pipeStep > 0 && arrows[pipeStep-1]) arrows[pipeStep-1].style.opacity='.7';
+      return true;
+    }
     animate(steps[pipeStep], {opacity:[0,1], y:[8,0]}, {duration:.5, easing:EASE});
     if(pipeStep > 0 && arrows[pipeStep-1]){
       animate(arrows[pipeStep-1], {opacity:[0.15,.7]}, {duration:.3, delay:.15});
